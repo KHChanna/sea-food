@@ -15,6 +15,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     protected $namespace = 'App\Http\Controllers';
+    protected $admin = 'App\Http\Controllers\Administrator';
 
     /**
      * The path to the "home" route for your application.
@@ -61,6 +62,11 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/web.php'));
+
+        Route::middleware('web')
+            ->namespace($this->admin)
+            ->prefix('admin')
+            ->group(base_path('routes/admin.php'));
     }
 
     /**
