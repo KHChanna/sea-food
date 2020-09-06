@@ -17,13 +17,13 @@
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-user"></i></span>
 							</div>
-							<input type="text" name="username" class="form-control input_user" value="" placeholder="username" required>
+							<input type="text" name="username" class="form-control input_user" value="admin" placeholder="username" required>
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-key"></i></span>
 							</div>
-							<input type="password" name="password" class="form-control input_pass" value="" placeholder="password" required>
+							<input type="password" name="password" class="form-control input_pass" value="123456" placeholder="password" required>
 						</div>
 						<div class="form-group">
 							<div class="custom-control custom-checkbox">
