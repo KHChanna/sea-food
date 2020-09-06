@@ -41,7 +41,7 @@
     @yield('content')
 
     <!-- footer side -->
-    @include('layouts.footer')
+    {{-- @include('layouts.footer') --}}
 
 <!-- jQuery -->
 <script src="{{ asset('/plugins/jquery/jquery.min.js') }}"></script>

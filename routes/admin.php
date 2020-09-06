@@ -18,3 +18,5 @@
 // });
 
 Route::resource('/', 'DashboardController');
+
+Route::resource('category', 'CategoryController');
