@@ -10,9 +10,9 @@
 					</div>
 				</div>
 				<div class="d-flex justify-content-center form_container">
-					<form action="{{ route('login') }}" method="POST">
+					<form action="{{ route('login') }}" method="POST" id="myForm">
 						@csrf
-						
+
 						<div class="input-group mb-3">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -32,7 +32,7 @@
 							</div>
 						</div>
 							<div class="d-flex justify-content-center mt-3 login_container">
-				 	<button type="submit" name="button" class="btn login_btn">Login</button>
+				 	<button type="submit"  name="button" class="btn login_btn">Login</button>
 				   </div>
 					</form>
 				</div>
@@ -48,4 +48,18 @@
 			</div>
 		</div>
 	</div>
+
+	@if ($errors->any())
+
+		<script>
+			$(document).ready(function(){
+				swal("Fail", "Your Username or Password is incorrect. Please try again", "error",{
+					buttons: {
+						confirm: "Ok"
+					},
+					timer: 3000,
+				});
+			});
+		</script>
+	@endif
 @endsection
