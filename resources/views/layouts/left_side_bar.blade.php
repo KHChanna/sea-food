@@ -63,7 +63,7 @@
 
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+            <i class="fab fa-product-hunt pr-2"></i>
               <p>
                 Products
               </p>
