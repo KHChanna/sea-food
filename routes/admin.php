@@ -20,5 +20,8 @@ Route::group(['middleware' => ['auth']], function () {
     //
     Route::resource('/', 'DashboardController');
     Route::resource('category', 'CategoryController');
+
+    //products route
+    Route::resource('products', 'ProductsController');
 });
 

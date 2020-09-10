@@ -71,7 +71,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link {{ \Request::is('admin/product*') ? 'active' : '' }}">
+            <a href="{{route('products.index')}}" class="nav-link {{ \Request::is('admin/product*') ? 'active' : '' }}">
             <i class="fab fa-product-hunt pr-2"></i>
               <p>
                 Products
