@@ -1,23 +1,23 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-           style="opacity: .8">
-      <span class="brand-text font-weight-light">SEA FOOD</span>
+    <a href="/admin" class="brand-link" class="text-center mx-auto">
+      <!-- <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" -->
+           <!-- style="opacity: .8"> -->
+           <h4 class="brand-text text-center font-weight-light">SEA FOOD</h4>
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <!-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">Admin</a>
         </div>
-      </div>
+      </div> -->
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -25,7 +25,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
+            <a href="/admin" class="nav-link {{ \Request::is('admin') ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -35,8 +35,17 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+            <a href="#" class="nav-link {{ \Request::is('admin/registry*') ? 'active' : '' }}">
+              <i class="fas fa-cash-register pr-2"></i>
+              <p>
+                Registry
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link {{ \Request::is('admin/purchase*') ? 'active' : '' }}">
+              <i class="fas fa-shopping-cart pr-2"></i>
               <p>
                 Purchase
               </p>
@@ -44,7 +53,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link {{ \Request::is('admin/unit*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Unit
@@ -53,8 +62,8 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+            <a href="{{route('category.index')}}" class="nav-link {{ \Request::is('admin/category*') ? 'active' : '' }}">
+              <i class="fas fa-sitemap pr-2"></i>
               <p>
                 Category
               </p>
@@ -62,8 +71,8 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+            <a href="{{route('products.index')}}" class="nav-link {{ \Request::is('admin/product*') ? 'active' : '' }}">
+            <i class="fab fa-product-hunt pr-2"></i>
               <p>
                 Products
               </p>
@@ -71,8 +80,8 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+            <a href="#" class="nav-link {{ \Request::is('admin/supplier*') ? 'active' : '' }}">
+              <i class="fas fa-users pr-2"></i>
               <p>
                 Supplier
               </p>
@@ -80,15 +89,15 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+            <a href="#" class="nav-link {{ \Request::is('admin/user*') ? 'active' : '' }}">
+              <i class="fas fa-user pr-2"></i>
               <p>
                 User
               </p>
             </a>
           </li>
 
-          <li class="nav-item has-treeview">
+          <!-- <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
@@ -141,7 +150,7 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> -->
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
