@@ -32,7 +32,7 @@
                     <div class="card">
                         <div class="row">
                             <div class="col-sm-12">
-                                <table class="table table-bordered mb-0">
+                                <table id="table" class="table mb-0 p-5">
                                     <thead>
                                         <th>#</th>
                                         <th>Name</th>
@@ -48,7 +48,7 @@
                                         <td>{{$product->id}}</td>
                                         <td>{{$product->name}}</td>
                                         <td>{{$product->code}}</td>
-                                        <td>{{$product->category['name']}}</td>
+                                        <td>{{$product->category}}</td>
                                         <td>{{$product->units}}</td>
                                         <td>{{$product->price}}</td>
                                         <td>
@@ -70,4 +70,9 @@
     </div>
 </div>
 
+<script>
+      $(document).ready(function() {
+        $('#table').DataTable();
+      });
+</script>
 @endsection

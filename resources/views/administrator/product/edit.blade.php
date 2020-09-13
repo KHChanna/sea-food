@@ -30,9 +30,7 @@
             @endif
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <form action="{{ route('products.update',$product->id) }}">
-                        @method('PUT') 
-                        @csrf
+                    <form action="{{ route('products.store',$product->id) }}" method="POST">
                         <div class="row">
                             <div class="col-sm-12 col-md-12">
                                 <div class="col-sm-12 col-md-6">
@@ -53,7 +51,7 @@
                                         <select name="category_id" id="" class="form-control">
                                             <option value="">Select Category</option>
                                             @foreach ($category as $cate)
-                                                <option {{$product->category['id'] == $cate->id ? "selected" : ""}} value="{{$cate->id ?? ''}}">{{$cate->name}}</option>
+                                                <option {{$product->category == $product->category ? "selected" : ""}} value="{{$cate->id ?? ''}}">{{$cate->name}}</option>
                                             @endforeach
                                         </select>
                                         {{-- <input type="text" name="category" class="form-control" placeholder="Category"> --}}
@@ -70,7 +68,7 @@
                                 <div class="col-sm-12 col-md-6">
                                     <div class="form-group">
                                         <strong>Units:</strong>
-                                        <input type="text" name="unit_id" value="{{$product->unit['id']}}" class="form-control" placeholder="Units">
+                                        <input type="text" name="unit_id" value="{{$product->unit}}" class="form-control" placeholder="Units">
                                     </div>
                                 </div>
                             </div>

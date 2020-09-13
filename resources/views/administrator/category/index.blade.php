@@ -25,9 +25,9 @@
             <div class="col-sm-12">
                 <div class="card">
                   <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 p-3">
 
-                    <table class="table table-bordered mb-0">
+                    <table id="table" class="table table-bordered mb-0">
                       <thead class="thead-dark">
                         <tr>
                           <th scope="col">#</th>
@@ -68,4 +68,10 @@
         <!-- /.content-header -->
 </div>
   <!-- /.content-wrapper -->
+
+  <script>
+      $(document).ready(function() {
+        $('#table').DataTable();
+      });
+  </script>
 @endsection
