@@ -16,7 +16,12 @@
 // Route::get('/', function () {
 //     return view('layouts.app');
 // });
+Route::group(['middleware' => ['auth']], function () {
+    //
+    Route::resource('/', 'DashboardController');
+    Route::resource('category', 'CategoryController');
 
-Route::resource('/', 'DashboardController');
+    //products route
+    Route::resource('products', 'ProductsController');
+});
 
-Route::resource('category', 'CategoryController');

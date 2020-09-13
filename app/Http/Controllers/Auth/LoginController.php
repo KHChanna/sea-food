@@ -55,7 +55,7 @@ class LoginController extends Controller
         if (\Auth::attempt($credentials)) {
             return redirect()->intended('/admin');
         }
-        return 'Failure';
+        return redirect()->back()->withInput()->withErrors(['error' => 'error']);
     } 
 
     public function logout()

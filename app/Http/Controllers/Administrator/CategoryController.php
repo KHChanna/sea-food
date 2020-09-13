@@ -19,7 +19,7 @@ class CategoryController extends Controller
         $categories = Category::all();
 
         // return view('administrator.category.index');
-        return view('administrator.category.datatable');
+        return view('administrator.category.index');
         // return $categories;
     }
 
