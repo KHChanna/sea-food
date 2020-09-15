@@ -80,8 +80,8 @@
         </div>
       </li>
       <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
+      <li class="nav-item dropdown" width="10px">
+        <a class="nav-link m-0" data-toggle="dropdown" href="#">
           <i class="fa fa-cog"></i>
         </a>
 

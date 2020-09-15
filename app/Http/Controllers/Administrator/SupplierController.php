@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SupplierStoreRequest;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
-use App\Models\Category;
-use Illuminate\Cache\RedisStore;
 
-class CategoryController extends Controller
+class SupplierController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
-        $categories = Category::all();
-
-        return view('administrator.category.index', compact('categories'));
+        $suppliers = Supplier::all();
+        return view('administrator.supplier.index', compact('suppliers'));
     }
 
     /**
@@ -29,8 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
-        return view('administrator.category.create');
+        return view('administrator.supplier.create');
     }
 
     /**
@@ -39,12 +36,14 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SupplierStoreRequest $request)
     {
         //
-        Category::create($request->all());
+        $validated = $request->validated();
 
-        return redirect()->route('category.index');
+        Supplier::create($request->all());
+
+        return redirect()->route('supplier.index');
     }
 
     /**
@@ -64,10 +63,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Supplier $supplier)
     {
         //
-        return view('administrator.category.edit', compact('category'));
+        return view('administrator.supplier.edit', compact('supplier'));
     }
 
     /**
@@ -80,9 +79,9 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         //
-        Category::find($id)->update($request->all());
+        Supplier::find($id)->update($request->all());
 
-        return redirect()->route('category.index');
+        return redirect()->route('supplier.index');
     }
 
     /**
@@ -94,5 +93,6 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         //
+        Supplier::find($id)->delete();
     }
 }

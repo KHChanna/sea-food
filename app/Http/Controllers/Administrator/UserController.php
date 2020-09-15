@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserStoreRequest;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -15,6 +18,8 @@ class UserController extends Controller
     public function index()
     {
         //
+        $users = User::all();
+        return view('administrator.user.index', compact('users'));
     }
 
     /**
@@ -25,6 +30,7 @@ class UserController extends Controller
     public function create()
     {
         //
+        return view('administrator.user.create');
     }
 
     /**
@@ -33,9 +39,19 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        User::create( [
+            'name' => $request->name,
+            'gender' => $request->gender,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ] );
+
+        return redirect()->route('user.index');
     }
 
     /**
@@ -55,9 +71,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view('administrator.user.edit', compact('user'));
     }
 
     /**
@@ -69,7 +85,15 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        User::find($id)->update( [
+            'name' => $request->name,
+            'gender' => $request->gender,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ] );
+
+        return redirect()->route('user.index');
     }
 
     /**
@@ -81,5 +105,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+        User::find($id)->delete();
+        return redirect()->route('user.index');
     }
 }
