@@ -17,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/products/list', 'Administrator\ProductsController@findProductsCriteria');
+Route::get('/products/detail/{id}', 'Administrator\ProductsController@productDetail');
+Route::get('/products/countAll', 'Administrator\ProductsController@productTotal');

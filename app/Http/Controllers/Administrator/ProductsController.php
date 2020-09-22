@@ -90,7 +90,7 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($id);
+        return dd($id);
         $product = Product::find($id);
 
         $product->name = $request->get('name');
@@ -100,9 +100,9 @@ class ProductsController extends Controller
         $product->category_id = $request->get('category_id');
         $product->unit_id = $request->get('unit_id');
         $product->place_id = 1;
-
+        dd($product);
         $product->save();
-        return redirect('admin/products/')->with('success', 'Product saved!');
+        return redirect()->route('products.index')->with('success', 'Product saved!');
     }
 
     /**
@@ -114,5 +114,47 @@ class ProductsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function findProductsCriteria() {
+        $products = Product::with('category')->get();
+        if($products == null) {
+            return [
+                code => 403,
+                message => "No product"
+            ];
+        }
+
+        $response = $this->response(200, "success", $products);
+        return $response;
+    }
+
+    public function productDetail($id) {
+        $product = Product::find($id);
+        if($product == null) {
+            return $this->resonseCodeAndMessage(403, "No product found!");
+        }
+        return $this->response(200, "success", $product);
+    }
+
+    public function productTotal() {
+        $products = Product::all();
+        $countProduct = $products->count();
+        return $this->response(200, "success", $countProduct);
+    }
+
+    function response($code, $message, $data) {
+        return [
+            'code' => $code,
+            'message' => $message,
+            'data' => $data
+        ];
+    }
+
+    function resonseCodeAndMessage($code, $message) {
+        return [
+            'code' => $code,
+            'message' => $message
+        ];
     }
 }

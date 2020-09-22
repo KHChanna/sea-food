@@ -53,7 +53,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link {{ \Request::is('admin/unit*') ? 'active' : '' }}">
+            <a href="{{route('units.index')}}" class="nav-link {{ \Request::is('admin/unit*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Unit

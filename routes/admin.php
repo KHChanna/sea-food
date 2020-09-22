@@ -22,6 +22,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('category', 'CategoryController');
 
     //products route
+    // Route::post('product/update', 'ProductsController@update')->name('product.update');
     Route::resource('products', 'ProductsController');
+    Route::resource('units', 'UnitsController');
 });
 
