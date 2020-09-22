@@ -21,3 +21,9 @@
  {
     return DB::table('units')->where('id', $id)->first();
  }
+
+ function getCategoryName($id) 
+ {
+   $data = DB::table('categories')->find($id)->first();
+   return $data->name;
+ }
