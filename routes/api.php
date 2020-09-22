@@ -27,3 +27,7 @@ use Illuminate\Support\Facades\Route;
 
         Route::apiResource('categories', 'API\CategoryController');
     });
+
+Route::get('/products/list', 'Administrator\ProductsController@findProductsCriteria');
+Route::get('/products/detail/{id}', 'Administrator\ProductsController@productDetail');
+Route::get('/products/countAll', 'Administrator\ProductsController@productTotal');
