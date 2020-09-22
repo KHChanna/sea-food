@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
+use App\Models\Unit;
 use Illuminate\Http\Request;
-use App\Models\Category;
-use Illuminate\Cache\RedisStore;
 
-class CategoryController extends Controller
+class UnitController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +16,8 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $categories = Category::all();
-
-        return view('administrator.category.index', compact('categories'));
+        $units = Unit::all();
+        return view('administrator.unit.index', compact('units'));
     }
 
     /**
@@ -30,7 +28,7 @@ class CategoryController extends Controller
     public function create()
     {
         //
-        return view('administrator.category.create');
+        return view('administrator.unit.create');
     }
 
     /**
@@ -42,9 +40,9 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
-        Category::create($request->all());
+        Unit::create($request->all());
 
-        return redirect()->route('category.index');
+        return redirect()->route('unit.index');
     }
 
     /**
@@ -64,10 +62,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Unit $unit)
     {
         //
-        return view('administrator.category.edit', compact('category'));
+        return view('administrator.unit.edit', compact('unit'));
     }
 
     /**
@@ -80,9 +78,9 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         //
-        Category::find($id)->update($request->all());
+        Unit::find($id)->update($request->all());
 
-        return redirect()->route('category.index');
+        return redirect()->route('unit.index');
     }
 
     /**
@@ -94,5 +92,6 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         //
+        Unit::find($id)->delete();
     }
 }

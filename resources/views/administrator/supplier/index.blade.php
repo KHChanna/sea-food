@@ -5,19 +5,19 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <div class="container pt-3">
-        <h4 class="">Manage Categories</h4>
+        <h4 class="">Manage Supplier</h4>
         <div class="d-flex d-background">
             <div>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb pull-left mb-0">
                       <li class="breadcrumb-item"><a href="#">Home</a></li>
-                      <li class="breadcrumb-item"><a href="#">Manage Categories</a></li>
+                      <li class="breadcrumb-item"><a href="#">Manage Supplier</a></li>
                       {{-- <li class="breadcrumb-item active" aria-current="page"></li> --}}
                     </ol>
                 </nav>
             </div>
             <div class="ml-auto p-2 ">
-                <a href="{{ route('category.create') }}"  class="btn btn-primary pull-right" >New Category</a>
+                <a href="{{ route('supplier.create') }}"  class="btn btn-primary pull-right" >New Supplier</a>
             </div>
           </div>
     </div>
@@ -29,29 +29,29 @@
                     <thead>
                       <tr>
                         <th scope="col" width="8%">#</th>
-                        <th scope="col">Code</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Parent</th>
-                        <th scope="col">description</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Address</th>
                         <th width="10%" scope="col">Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                        @if (@$categories)
-                            @foreach ($categories as $key => $category)
+                        @if (@$suppliers)
+                            @foreach ($suppliers as $key => $supplier)
                                 <tr>
                                   <td>{{$key + 1}}</td>
-                                  <td>{{$category->code}}</td>
-                                  <td>{{$category->name}}</td>
-                                  <td>{{$category->parent}}</td>
-                                  <td>{{$category->description}}</td>
+                                  <td>{{$supplier->name}}</td>
+                                  <td>{{$supplier->phone}}</td>
+                                  <td>{{$supplier->email}}</td>
+                                  <td>{{$supplier->address}}</td>
                                   <td>
                                       <div class="d-flex justify-content-start">
-                                        <a href="{{ route('category.edit', [$category->id]) }}" class="btn btn-sm btn-warning mr-2"><i class="fa fa-edit text-white"></i></a>
+                                        <a href="{{ route('supplier.edit', [$supplier->id]) }}" class="btn btn-sm btn-warning mr-2"><i class="fa fa-edit text-white"></i></a>
                                         {{-- <form action="{{ route('user.destroy', [$supplier->id]) }}" method="post" style="width: 0px !important; margin:0 !important; ">
                                             @csrf
                                             @method('DELETE') --}}
-                                            <button data-id="{{$category->id}}" class="btn btn-sm btn-danger btn-delete"><i class="fas fa-trash-alt"></i></button>
+                                            <button data-id="{{$supplier->id}}" class="btn btn-sm btn-danger btn-delete"><i class="fas fa-trash-alt"></i></button>
                                         {{-- </form> --}}
                                       </div>
                                   </td>

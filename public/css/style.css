@@ -72,3 +72,49 @@
     form {
         width: 23em !important;
     }
+
+    .main-header, .navbar , .navbar-expand, .navbar-white, .navbar-light {
+        height: 4em !important;
+    }
+
+    .d-background{
+        background-color: #e9ecef !important;
+    }
+
+    th {
+        color: #fff !important;
+        background-color: #89b8c7 !important;
+    }
+
+    .btn-primary {
+        border: none    ;
+        color: #fff !important;
+        background-color: #89b8c7 !important;
+    }
+
+    .btn-primary:hover {
+        border: none    ;
+        color: #fff !important;
+        background-color: #7499a5 !important;
+    }
+    .btn-primary:active {
+        border: none    ;
+        color: #fff !important;
+        background-color: #89b8c7 !important;
+    }
+
+    select {
+        padding: 0.2em 1em !important;
+    }
+
+    .current {
+        background-color: #89b8c7 !important;
+    }
+
+    .select2-selection, .select2-selection--single {
+        height: 2.3em !important;
+    }
+    .select2-selection__arrow {
+        padding: 17px !important;
+    }
+    

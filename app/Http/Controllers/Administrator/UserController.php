@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserStoreRequest;
+use App\User;
 use Illuminate\Http\Request;
-use App\Models\Category;
-use Illuminate\Cache\RedisStore;
+use Illuminate\Support\Facades\Hash;
 
-class CategoryController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +18,8 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $categories = Category::all();
-
-        return view('administrator.category.index', compact('categories'));
+        $users = User::all();
+        return view('administrator.user.index', compact('users'));
     }
 
     /**
@@ -30,7 +30,7 @@ class CategoryController extends Controller
     public function create()
     {
         //
-        return view('administrator.category.create');
+        return view('administrator.user.create');
     }
 
     /**
@@ -39,12 +39,19 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
-        //
-        Category::create($request->all());
+        $validated = $request->validated();
 
-        return redirect()->route('category.index');
+        User::create( [
+            'name' => $request->name,
+            'gender' => $request->gender,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ] );
+
+        return redirect()->route('user.index');
     }
 
     /**
@@ -64,10 +71,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(User $user)
     {
-        //
-        return view('administrator.category.edit', compact('category'));
+        return view('administrator.user.edit', compact('user'));
     }
 
     /**
@@ -79,10 +85,15 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        Category::find($id)->update($request->all());
+        User::find($id)->update( [
+            'name' => $request->name,
+            'gender' => $request->gender,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ] );
 
-        return redirect()->route('category.index');
+        return redirect()->route('user.index');
     }
 
     /**
@@ -94,5 +105,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         //
+        User::find($id)->delete();
+        return redirect()->route('user.index');
     }
 }
