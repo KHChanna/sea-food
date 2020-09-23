@@ -95,4 +95,41 @@ class SupplierController extends Controller
         //
         Supplier::find($id)->delete();
     }
+
+    public function findSupplierCriteria() {
+        $suppliers = Supplier::all();
+        if ($suppliers == null) {
+            return $this->resonseCodeAndMessage(403, 'No Supplier');
+        }
+        return $this->response(200, 'success', $suppliers);
+    }
+
+    public function supplierDetail($id) {
+        $supplier = Supplier::find($id);
+        if($supplier == null) {
+            return $this->resonseCodeAndMessage(403, 'No Supplier found!');
+        }
+        return $this->response(200, 'success', $supplier);
+    }
+
+    public function supplierTotal() {
+        $supplier = Supplier::all();
+        $countSupplier = $supplier->count();
+        return $this->response(200, "success", $countSupplier);
+    }
+
+    function response($code, $message, $data) {
+        return [
+            'code' => $code,
+            'message' => $message,
+            'data' => $data
+        ];
+    }
+
+    function resonseCodeAndMessage($code, $message) {
+        return [
+            'code' => $code,
+            'message' => $message
+        ];
+    }
 }

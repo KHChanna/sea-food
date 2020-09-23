@@ -95,4 +95,41 @@ class CategoryController extends Controller
     {
         //
     }
+
+    public function findCategoryCriteria() {
+        $categories = Category::all();
+        if($categories == null) {
+            return $this->responseCodeAndMessage(404, 'No Category');
+        }
+        return $this->response(200, 'success', $categories);
+    }
+
+    public function categoryDetail($id) {
+        $category = Category::find($id);
+        if ($category == null) {
+            return $this->responseCodeAndMessage(404, 'No Category');
+        }
+        return $this->response(200, 'success', $category);
+    }
+
+    public function categoryTotal() {
+        $categories = Category::all();
+        $countCategory = $categories->count();
+        return $this->response(200, "success", $countCategory);
+    }
+
+    function response($code, $message, $data) {
+        return [
+            'code' => $code,
+            'message' => $message,
+            'data' => $data
+        ];
+    }
+
+    function resonseCodeAndMessage($code, $message) {
+        return [
+            'code' => $code,
+            'message' => $message
+        ];
+    }
 }

@@ -22,9 +22,17 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('category', 'CategoryController');
 
     //products route
+
+
     // Route::post('product/update', 'ProductsController@update')->name('product.update');
     Route::resource('products', 'ProductsController');
     Route::resource('units', 'UnitsController');
+
+
+    // Route::post('product/update', 'ProductsController@update')->name('product.update');
+    // Route::resource('products', 'ProductsController');
+    // Route::resource('units', 'UnitsController');
+
     Route::resource('product', 'ProductsController');
     // user route
     Route::resource('user', 'UserController');
@@ -34,5 +42,9 @@ Route::group(['middleware' => ['auth']], function () {
     // Unit Route
     Route::resource('unit', 'UnitController');
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 262da52f49a98841f0c549f8ddb5d183b7ad3e9d
 });
 
