@@ -22,11 +22,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('category', 'CategoryController');
 
     //products route
-<<<<<<< HEAD
+
     // Route::post('product/update', 'ProductsController@update')->name('product.update');
     Route::resource('products', 'ProductsController');
     Route::resource('units', 'UnitsController');
-=======
+
     Route::resource('product', 'ProductsController');
     // user route
     Route::resource('user', 'UserController');
@@ -36,6 +36,6 @@ Route::group(['middleware' => ['auth']], function () {
     // Unit Route
     Route::resource('unit', 'UnitController');
 
->>>>>>> 1ed9f2994063aca6a71add9d533f4930875530e9
+
 });
 
