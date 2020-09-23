@@ -120,20 +120,6 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return dd($id);
-        $product = Product::find($id);
-
-        $product->name = $request->get('name');
-        $product->code = $request->get('code');
-        $product->price = $request->get('price');
-        $product->description = $request->get('description');
-        $product->category_id = $request->get('category_id');
-        $product->unit_id = $request->get('unit_id');
-        $product->place_id = 1;
-        dd($product);
-        $product->save();
-        return redirect()->route('products.index')->with('success', 'Product saved!');
-
         // dd($request->all());
         Product::find($id)->update( [
             'name'              =>      $request->name,
@@ -155,14 +141,16 @@ class ProductsController extends Controller
                 ] );
             }
         }
-
         if ( isset($request->old) )
         {
             foreach ($request->old as $image)
             {
-                ProductImage::find($image)->delete();
+                // dd($image);
+                $product_image = ProductImage::where('id', $image)->first();
+                if ($product_image)
+                    unlink(public_path('/uploads/images/products/' . $product_image->image));
+                    ProductImage::where('product_id', $id)->delete();
             }
-        //    ProductImage::find($request->od)
         }
 
         if( isset($request->images) ) 
@@ -201,8 +189,8 @@ class ProductsController extends Controller
         $products = Product::with('category')->get();
         if($products == null) {
             return [
-                code => 403,
-                message => "No product"
+                'code' => 403,
+                'message' => "No product"
             ];
         }
 

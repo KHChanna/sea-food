@@ -25,7 +25,7 @@
       <div class="row mt-2">
         <div class="col-12">
             <div style="width: 60%" class="mx-auto">
-                <form class="m-0 w-100" action="{{ route('unit.store') }}" method="POST">
+                <form class="m-0 w-100" action="{{ route('units.store') }}" method="POST">
                   @csrf
                     @include('administrator.unit.form')
                 

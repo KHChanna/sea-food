@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Administrator;
+namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ProductResource;
+use App\Models\Product;
 use Illuminate\Http\Request;
-use App\Models\Units;
+use Illuminate\Support\Facades\Validator;
 
-class UnitsController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +17,9 @@ class UnitsController extends Controller
      */
     public function index()
     {
-        // dd("test");
-        $units = Units::all();
-        // dd($units);
-        return view('administrator.units.index', compact('units'));
+        //
+        $products = Product::get();
+        return ProductResource::collection($products);
     }
 
     /**
@@ -28,7 +29,7 @@ class UnitsController extends Controller
      */
     public function create()
     {
-        return view('administrator.units.create');
+        //
     }
 
     /**
@@ -39,12 +40,25 @@ class UnitsController extends Controller
      */
     public function store(Request $request)
     {
-        $unit = new Units([
-            'name' => $request->get('name'),
-            'description' => $request->get('description')
-        ]);
-        $unit->save();
-        return redirect('admin/units/')->with('success', 'Units saved!');
+        // validation
+        // $validator = Validator::make($request->all(), [
+        //     'code' => 'required|string',
+        //     'name' => 'required|string',
+        //     'category_id' => 'required|numeric',
+        //     'unit_id' => 'required|numeric',
+        // ]);
+
+        // if ($validator->fails()) {
+        //     $data = [
+        //         'status' => '0',
+        //         'messages' => $validator->messages()->get('*')
+        //     ];
+        //     return response()->json($data);
+        // }
+
+       
+
+        // return response()->json(['messages' => 'Category Created Successfully']);
     }
 
     /**
@@ -56,6 +70,8 @@ class UnitsController extends Controller
     public function show($id)
     {
         //
+        $product = Product::find($id)->get();
+        return ProductResource::collection($product);
     }
 
     /**
@@ -90,5 +106,11 @@ class UnitsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getCountProduct()
+    {
+        $products = Product::get();
+        return JsonResponse( count($products) );
     }
 }

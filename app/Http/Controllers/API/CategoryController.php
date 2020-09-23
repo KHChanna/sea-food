@@ -46,5 +46,10 @@ class CategoryController extends Controller
 
     }
 
+    public function count()
+    {
+        $categories = Category::get();
+        return JsonResponse( count($categories) );
+    }
 
 }

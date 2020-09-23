@@ -46,4 +46,15 @@ class LoginController extends Controller
             'expires_at' => Carbon::parse( $tokenResult->token->expires_at )->toDateTimeString()
         ] );
     }
+
+    public function logout()
+    {
+        $user = \Auth::user()->token();
+        $user->revoke();
+        
+        return response()->json([
+            'status'    => 200,
+            'message'   => 'Logout Successfully!',
+        ]);
+    }
 }

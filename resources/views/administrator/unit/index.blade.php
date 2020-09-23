@@ -17,7 +17,7 @@
                 </nav>
             </div>
             <div class="ml-auto p-2 ">
-                <a href="{{ route('unit.create') }}"  class="btn btn-primary pull-right" >New Unit</a>
+                <a href="{{ route('units.create') }}"  class="btn btn-primary pull-right" >New Unit</a>
             </div>
           </div>
     </div>
@@ -45,7 +45,7 @@
                                   <td>{{$unit->description}}</td>
                                   <td>
                                       <div class="d-flex justify-content-start">
-                                        <a href="{{ route('unit.edit', [$unit->id]) }}" class="btn btn-sm btn-warning mr-2"><i class="fa fa-edit text-white"></i></a>
+                                        <a href="{{ route('units.edit', [$unit->id]) }}" class="btn btn-sm btn-warning mr-2"><i class="fa fa-edit text-white"></i></a>
                                         {{-- <form action="{{ route('user.destroy', [$supplier->id]) }}" method="post" style="width: 0px !important; margin:0 !important; ">
                                             @csrf
                                             @method('DELETE') --}}
@@ -78,7 +78,7 @@
             .then((willDelete) => {
               if (willDelete) {
                 let id = ($(this).attr('data-id'));
-                let route = "{{ route('unit.destroy', ['id']) }}";
+                let route = "{{ route('units.destroy', ['id']) }}";
                 var token = $("meta[name='csrf-token']").attr("content");
                
                 $.ajax({

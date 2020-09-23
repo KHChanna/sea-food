@@ -25,7 +25,7 @@
       <div class="row mt-2">
         <div class="col-12">
             <div style="width: 60%" class="mx-auto">
-                <form class="m-0 w-100" action="{{ route('unit.update', [$unit->id]) }}" method="post">
+                <form class="m-0 w-100" action="{{ route('units.update', [$unit->id]) }}" method="post">
                   @csrf
 
                   @method('PUT')
