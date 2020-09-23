@@ -14,10 +14,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+<<<<<<< HEAD
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 //product route
+=======
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+    Route::post('login', 'API\Auth\LoginController@login');
+    // Route::post('signup', 'AuthController@signup');
+  
+    Route::group( [ 'middleware' => 'auth:api' ], function() {
+        // Route::get('logout', 'AuthController@logout');
+        // Route::get('user', 'AuthController@user');
+
+        Route::apiResource('categories', 'API\CategoryController');
+    });
+
+>>>>>>> 262da52f49a98841f0c549f8ddb5d183b7ad3e9d
 Route::get('/products/list', 'Administrator\ProductsController@findProductsCriteria');
 Route::get('/products/detail/{id}', 'Administrator\ProductsController@productDetail');
 Route::get('/products/countAll', 'Administrator\ProductsController@productTotal');

@@ -4,7 +4,7 @@
 
 <div class="form-group">
   <label for="inputAddress">Parent</label>
-  {{ Form::select('parent_id', category(), [], ['class' => 'form-control select2']) }}
+  {{ Form::select('parent_id', category(), [], ['placeholder' => 'Select Parent','class' => 'form-control select2', 'required']) }}
   {{-- <select class="form-control select2" name="parent_id">
       @if ($categories)
           @foreach ($categories as $item)
