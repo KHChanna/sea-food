@@ -31,6 +31,8 @@ class CategoryController extends Controller
     public function create()
     {
         //
+        $category = Category::all();
+        return view('administrator.category.create', compact('category'));
     }
 
     /**
@@ -42,6 +44,14 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
+        $category = new Category([
+            'name' => $request->get('name'),
+            'code' => $request->get('code'),
+            // 'parent_id' => $request->parent_id, 'parent_id' => 1,
+            'description' => $request->get('description')
+        ]);
+        $categories->save();
+        return redirect('admin/category/')->with('success', 'Category saved!');
     }
 
     /**
