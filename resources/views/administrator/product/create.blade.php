@@ -1,96 +1,71 @@
 @extends('layouts.app')
-  
+
 @section('content')
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Add Products</h1>
-                </div><!-- /.col -->
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item ">Home</li>
-                        <li class="breadcrumb-item"> <a href="{{ route('products.index') }}">Products</a></li>
-                    </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-        <div class="container-fluid">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-            <div class="row mb-2">
-                <div class="col-sm-12">
-                    <form action="{{ route('products.store') }}" method="POST">
-                        @csrf
-                      
-                        <div class="row">
-                            <div class="col-sm-12 col-md-12">
-                                <div class="col-sm-12 col-md-6">
-                                    <div class="form-group">
-                                        <strong>Name:</strong>
-                                        <input type="text" name="name" class="form-control" placeholder="Name">
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-6">
-                                    <div class="form-group">
-                                        <strong>Code:</strong>
-                                        <input type="text" name="code" class="form-control" placeholder="Code">
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-6">
-                                    <div class="form-group">
-                                        <strong>Category:</strong>
-                                        <select name="category_id" id="" class="form-control">
-                                            <option value="">Select Category</option>
-                                            @foreach ($category as $cate)
-                                                <option value="{{$cate->id}}">{{$cate->name}}</option>
-                                            @endforeach
-                                        </select>
-                                        {{-- <input type="text" name="category" class="form-control" placeholder="Category"> --}}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-12">
-                                <div class="col-sm-12 col-md-6">
-                                    <div class="form-group">
-                                        <strong>Price:</strong>
-                                        <input type="text" name="price" class="form-control" placeholder="Price">
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-6">
-                                    <div class="form-group">
-                                        <strong>Units:</strong>
-                                        <input type="text" name="unit_id" class="form-control" placeholder="Units">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-12">
-                                <div class="col-sm-12 col-md-6">
-                                    <div class="form-group">
-                                        <strong>Description:</strong>
-                                        <textarea class="form-control" style="height:150px" name="description" placeholder="Detail"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-8 text-left">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </form>
-                </div>
+    <div class="container pt-3">
+        <h4 class="">Manage Categories</h4>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item "><a href="#">Manage Product</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Product</li>
+          </ol>
+        </nav>
+       
+
+    </div>
+
+    <div class="container mt-2 p-3 mb-5" style="background-color: #fff">
+      <div class="row">
+        <p class="text-danger">All field that contain * are required.</p>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-12">
+            <div style="width: 60%" class="mx-auto">
+                <form class="m-0 w-100" action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
+                  @csrf
+                    @include('administrator.product.form')
+                
+                  </form>
             </div>
-        </div>
+        </div>  
+      </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+        
+        $('.input-images').imageUploader();
+
+        $('#addMore').on('click', function(){
+          $(this).hide();
+          let rowCount = $('tbody tr').length;
+          if (rowCount > 1)
+            return;
+
+          let rowElement = `
+                <tr>
+                  <td class="pt-3">1</td>
+                  <td>{{ Form::select('unit_id[]', childUnits(), [], ['placeholder' => 'Please Pick Unit ...','class' => 'form-control select2', 'required']) }}</td>
+                  <td><input type="text" class="form-control" name="qty[]"></td>
+                  <td><input type="number" class="form-control " name="price[]"></td>
+                  <td class="pt-3"><a class="btn btn-sm btn-danger remove-unit"><i class="fa fa-minus text-white"></i></a></td>
+                </tr>
+          `;
+
+          $('table tbody').append(rowElement);
+          $('.select2').select2();
+        });
+
+    });
+
+    $(document).delegate('.remove-unit', 'click',function(){
+      $(this).closest('tr').remove();
+      $('#addMore').show();
+    })
+</script>
 @endsection

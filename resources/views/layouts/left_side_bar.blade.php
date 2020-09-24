@@ -53,7 +53,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link {{ \Request::is('admin/unit*') ? 'active' : '' }}">
+            <a href="{{route('units.index')}}" class="nav-link {{ \Request::is('admin/unit*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Unit
@@ -71,7 +71,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{route('products.index')}}" class="nav-link {{ \Request::is('admin/product*') ? 'active' : '' }}">
+            <a href="{{route('product.index')}}" class="nav-link {{ \Request::is('admin/product*') ? 'active' : '' }}">
             <i class="fab fa-product-hunt pr-2"></i>
               <p>
                 Products
@@ -80,7 +80,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link {{ \Request::is('admin/supplier*') ? 'active' : '' }}">
+            <a href="{{ route('supplier.index') }}" class="nav-link {{ \Request::is('admin/supplier*') ? 'active' : '' }}">
               <i class="fas fa-users pr-2"></i>
               <p>
                 Supplier
@@ -89,7 +89,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link {{ \Request::is('admin/user*') ? 'active' : '' }}">
+            <a href="{{ route('user.index') }}" class="nav-link {{ \Request::is('admin/user*') ? 'active' : '' }}">
               <i class="fas fa-user pr-2"></i>
               <p>
                 User

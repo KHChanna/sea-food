@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Administrator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Cache\RedisStore;
 
 class CategoryController extends Controller
 {
@@ -18,9 +19,7 @@ class CategoryController extends Controller
         //
         $categories = Category::all();
 
-        // return view('administrator.category.index');
-        return view('administrator.category.index');
-        // return $categories;
+        return view('administrator.category.index', compact('categories'));
     }
 
     /**
@@ -31,8 +30,12 @@ class CategoryController extends Controller
     public function create()
     {
         //
+<<<<<<< HEAD
         $category = Category::all();
         return view('administrator.category.create', compact('category'));
+=======
+        return view('administrator.category.create');
+>>>>>>> d023b6b2fe07bc2b2fc35d54d02ff93b9a087395
     }
 
     /**
@@ -44,6 +47,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
+<<<<<<< HEAD
         $category = new Category([
             'name' => $request->get('name'),
             'code' => $request->get('code'),
@@ -52,6 +56,11 @@ class CategoryController extends Controller
         ]);
         $categories->save();
         return redirect('admin/category/')->with('success', 'Category saved!');
+=======
+        Category::create($request->all());
+
+        return redirect()->route('category.index');
+>>>>>>> d023b6b2fe07bc2b2fc35d54d02ff93b9a087395
     }
 
     /**
@@ -71,9 +80,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
         //
+        return view('administrator.category.edit', compact('category'));
     }
 
     /**
@@ -86,6 +96,9 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         //
+        Category::find($id)->update($request->all());
+
+        return redirect()->route('category.index');
     }
 
     /**
@@ -97,5 +110,42 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function findCategoryCriteria() {
+        $categories = Category::all();
+        if($categories == null) {
+            return $this->responseCodeAndMessage(404, 'No Category');
+        }
+        return $this->response(200, 'success', $categories);
+    }
+
+    public function categoryDetail($id) {
+        $category = Category::find($id);
+        if ($category == null) {
+            return $this->responseCodeAndMessage(404, 'No Category');
+        }
+        return $this->response(200, 'success', $category);
+    }
+
+    public function categoryTotal() {
+        $categories = Category::all();
+        $countCategory = $categories->count();
+        return $this->response(200, "success", $countCategory);
+    }
+
+    function response($code, $message, $data) {
+        return [
+            'code' => $code,
+            'message' => $message,
+            'data' => $data
+        ];
+    }
+
+    function resonseCodeAndMessage($code, $message) {
+        return [
+            'code' => $code,
+            'message' => $message
+        ];
     }
 }

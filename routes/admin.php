@@ -1,6 +1,6 @@
 <?php
 
-// use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,5 +23,16 @@ Route::group(['middleware' => ['auth']], function () {
 
     //products route
     Route::resource('products', 'ProductsController');
+    // Route::resource('units', 'UnitController');
+
+    Route::resource('product', 'ProductsController');
+    // user route
+    Route::resource('user', 'UserController');
+    // Supplier
+    Route::resource('supplier', 'SupplierController');
+
+    // Unit Route
+    Route::resource('units', 'UnitController');
+
 });
 

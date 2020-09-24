@@ -28,6 +28,24 @@
   <link rel="stylesheet" href="{{ asset('/plugins/summernote/summernote-bs4.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  {{-- datatable --}}
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.css"/>
+
+  {{-- select 2 --}}
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+
+  {{-- Image uploader --}}
+  <link href="{{ asset('/css/image-uploader.min.css') }}" rel="stylesheet" />
+
+  {{-- custom style --}}
+  <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
+
+  {{-- Jquery  --}}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+  <script src="{{  asset('/js/image-uploader.js') }}"></script>
+  
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -43,8 +61,13 @@
     <!-- footer side -->
     {{-- @include('layouts.footer') --}}
 
+    <script>
+        $(document).ready(function() {
+          $('.select2').select2();
+        });
+    </script>
 <!-- jQuery -->
-<script src="{{ asset('/plugins/jquery/jquery.min.js') }}"></script>
+{{-- <script src="{{ asset('/plugins/jquery/jquery.min.js') }}"></script> --}}
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ asset('/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -77,5 +100,6 @@
 <script src="{{ asset('/dist/js/pages/dashboard.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('/dist/js/demo.js') }}"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.js"></script>
 </body>
 </html>
