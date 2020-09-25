@@ -13,7 +13,7 @@ class CategoryController extends Controller
     //
     public function index()
     {
-        $categories = Category::get();
+        $categories = Category::paginate();
         return CategoryResource::collection($categories);
     }
 
