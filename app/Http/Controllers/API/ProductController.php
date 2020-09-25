@@ -18,7 +18,7 @@ class ProductController extends Controller
     public function index()
     {
         //
-        $products = Product::get();
+        $products = Product::paginate();
         return ProductResource::collection($products);
     }
 
