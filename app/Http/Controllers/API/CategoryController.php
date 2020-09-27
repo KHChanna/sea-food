@@ -13,7 +13,7 @@ class CategoryController extends Controller
     //
     public function index()
     {
-        $categories = Category::paginate();
+        $categories = Category::orderBy('created_at', 'desc')->paginate();
         return CategoryResource::collection($categories);
     }
 
@@ -32,13 +32,13 @@ class CategoryController extends Controller
             return response()->json($data);
         }
 
-        Category::create( [
+        $category = Category::create( [
             'name' => $request->name,
             'parent_id' => $request->parent,
             'description' => $request->description,
         ] );
 
-        return response()->json(['messages' => 'Category Created Successfully']);
+        return response()->json(['data' => $category]);
     }
 
     public function update(Request $request, $id)
