@@ -53,6 +53,24 @@
           </li>
 
           <li class="nav-item">
+            <a href="{{route('sale.index')}}" class="nav-link {{ \Request::is('admin/sale*') ? 'active' : '' }}">
+              <i class="fas fa-shopping-cart pr-2"></i>
+              <p>
+                Sale
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{route('sale.index')}}" class="nav-link {{ \Request::is('admin/adjustment*') ? 'active' : '' }}">
+              <i class="fa fa-adjust pr-2" aria-hidden="true"></i>
+              <p>
+                Adjustment
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="{{route('units.index')}}" class="nav-link {{ \Request::is('admin/unit*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-th"></i>
               <p>

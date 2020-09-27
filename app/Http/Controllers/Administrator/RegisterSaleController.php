@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Models\Register;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
-class DashboardController extends Controller
+class RegisterSaleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +16,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $users = User::count();
-        // $users = User::count();
-        return view('administrator.dashboard', compact('users'));
+        //
     }
 
     /**
@@ -39,6 +38,18 @@ class DashboardController extends Controller
     public function store(Request $request)
     {
         //
+        if ($request->ajax())
+        {
+            Register::create( [
+                'date'          =>  Carbon::today(),
+                'open_balance'  =>  $request->amount
+            ] );
+
+            return response()->json([
+                'status_code'     =>  200,
+                'redirect_url'    =>  route('sale.create'),
+            ]);
+        }
     }
 
     /**

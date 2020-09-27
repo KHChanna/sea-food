@@ -49,3 +49,39 @@
         'data'  =>  $data,
    ]);
  }
+
+ function supplier()
+ {
+  return DB::table('suppliers')->pluck('name', 'id');
+ }
+
+ function PaymentType()
+ {
+   return [ 1 => 'Cash On hand', 2 => 'ABA', 3 => 'Wing', 4 => 'ACELEDA' ];
+ }
+
+ function Payment($id)
+ {
+    $payment = '';
+    switch ($id) {
+      case 2:
+        $payment = 'ABA';
+        break;
+      case 3:
+        $payment = 'Wing';
+        break;
+      case 4:
+        $payment = 'ACELEDA';
+      break;
+      default:
+      $payment = 'Cash On hand';
+    }
+
+    return $payment;
+ }
+
+ function product($id)
+ {
+   $product = \DB::table('products')->find($id);
+   return $product->name;
+ }

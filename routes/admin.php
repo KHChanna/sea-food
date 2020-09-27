@@ -34,5 +34,14 @@ Route::group(['middleware' => ['auth']], function () {
     // Unit Route
     Route::resource('units', 'UnitController');
 
+    Route::resource('sale', 'SaleController');
+    Route::get('sale/add-cart/{id}', 'SaleController@addCard')->name('sale.addCart');
+    Route::get('sale-get-product', 'SaleController@getCart')->name('sale.get-Cart');
+    Route::get('sale-remove-product/{id}', 'SaleController@removeCart')->name('sale.remove-Cart');
+    Route::post('sale-remove-all-product', 'SaleController@removeCartAll')->name('sale.remove-all-Cart');
+    Route::post('sale-update-product/{id}', 'SaleController@updateProduct')->name('sale.update-Cart');
+
+    Route::resource('regisersale', 'RegisterSaleController');
+
 });
 
