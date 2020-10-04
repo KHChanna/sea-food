@@ -33,7 +33,7 @@
               </p>
             </a>
           </li>
-
+{{-- 
           <li class="nav-item">
             <a href="#" class="nav-link {{ \Request::is('admin/registry*') ? 'active' : '' }}">
               <i class="fas fa-cash-register pr-2"></i>
@@ -41,7 +41,7 @@
                 Registry
               </p>
             </a>
-          </li>
+          </li> --}}
 
           <li class="nav-item">
             <a href="#" class="nav-link {{ \Request::is('admin/purchase*') ? 'active' : '' }}">
@@ -124,7 +124,41 @@
             </a>
           </li>
 
-          <!-- <li class="nav-item has-treeview">
+          <li class="nav-item">
+            <a href="#" class="nav-link {{ \Request::is('admin/registry*') ? 'active' : '' }}">
+              <i class="fas fa-wallet pr-2"></i>
+              <p>
+                Payment Type
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link {{ \Request::is('admin/registry*') ? 'active' : '' }}">
+              <i class="fas fa-chart-bar pr-2"></i>
+              <p>
+                Report
+              </p>
+              <i class="fas fa-angle-left right"></i>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="pages/layout/top-nav.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Sale Report</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Purchase Report</p>
+                </a>
+              </li>
+            
+            </ul>
+          </li>
+
+           {{-- <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
@@ -177,7 +211,7 @@
                 </a>
               </li>
             </ul>
-          </li> -->
+          </li> --}}
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
