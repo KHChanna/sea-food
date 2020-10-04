@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
+use App\Models\SaleDetail;
+use App\Models\Supplier;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -16,8 +20,11 @@ class DashboardController extends Controller
     public function index()
     {
         $users = User::count();
-        // $users = User::count();
-        return view('administrator.dashboard', compact('users'));
+        $sale_detail = SaleDetail::whereDate('created_at', Carbon::today())->sum('total');
+        $products = Product::count();
+        $suppliers = Supplier::count();
+
+        return view('administrator.dashboard', compact('users', 'sale_detail', 'products', 'suppliers'));
     }
 
     /**

@@ -30,9 +30,9 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>0</h3>
+                    <h3>{{ number_format($sale_detail, 2) }} $</h3>
 
-                    <p>New Orders</p>
+                    <p>Daily Income</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-bag"></i>
@@ -45,9 +45,9 @@
                 <!-- small box -->
                 <div class="small-box bg-success">
                 <div class="inner">
-                    <h3>53<sup style="font-size: 20px">%</sup></h3>
+                    <h3>{{$products}}<sup style="font-size: 20px"></sup></h3>
 
-                    <p>Sale</p>
+                    <p>Products</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-stats-bars"></i>
@@ -60,9 +60,9 @@
                 <!-- small box -->
                 <div class="small-box bg-warning">
                 <div class="inner">
-                    <h3>{{$users}}</h3>
+                    <h3>{{$suppliers}}</h3>
 
-                    <p>User</p>
+                    <p>Supplier</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-person-add"></i>
@@ -76,6 +76,18 @@
             </div>
             <!-- /.row -->
             <!-- Main row -->
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2>Weekly</h2>
+                    <canvas id="week" width="200" ></canvas>
+                </div>
+                <div class="col-sm-6">
+                    <h2>Monthly</h2>
+                    <canvas id="year" width="200" ></canvas>
+
+                </div>
+            </div>
            
             <!-- /.row (main row) -->
         </div><!-- /.container-fluid -->
@@ -83,4 +95,80 @@
         <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+
+  <script>
+    var ctx = document.getElementById('week');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Week1', 'Week2', 'Week3', 'Week4'],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+    var year = document.getElementById('year');
+    var myChart = new Chart(year, {
+        type: 'pie',
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+
   @endsection
