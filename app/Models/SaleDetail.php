@@ -16,4 +16,9 @@ class SaleDetail extends Model
         'price',
         'total'
     ];
+
+    public function unit()
+    {
+        return $this->belongsTo('App\Models\Unit', 'unit_id');
+    }
 }

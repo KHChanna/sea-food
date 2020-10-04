@@ -16,7 +16,7 @@
             <div class="col-sm-2">Invoice Number</div>
             <div class="col-sm-2">: {{$sale->invoice_number}}</div>
             <div class="col-sm-2">Total</div>
-            <div class="col-sm-2">: {{$sale->total}}</div>
+            <div class="col-sm-2">: {{$total}}</div>
         </div>
 
         <div class="row mb-1">
@@ -63,7 +63,7 @@
                         <tr>
                             <td>{{++$key}}</td>
                             <td>{{product($item->product_id) ?? ''}}</td>
-                            <td>{{$item->unit_id}}</td>
+                            <td>{{$item->unit->name ?? ''}}</td>
                             <td>{{$item->qty}}</td>
                             <td>{{$item->price}}</td>
                             <td>{{$item->total}}</td>

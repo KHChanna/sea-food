@@ -8,8 +8,9 @@
               @foreach ($products as $product)
               <div class="row mx-2 my-card" id="{{ $product->id }}">
                 <div class="col-sm-4">
-                  <div class="card" style="width: 12rem;">
-                    <img src="https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg" class="img-thumbnail">
+                    {{-- https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg --}}
+                  <div class="card" style="width: 12rem;"> 
+                    <img src="{{ $product->image ? asset('uploads/images/products/' . $product->image->image ) : 'https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg' }}" class="img-thumbnail" >
                     <div class="card-body">
                       <h5 class="card-title">{{$product->name}}</h5>
                     </div>

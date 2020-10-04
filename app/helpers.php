@@ -85,3 +85,8 @@
    $product = \DB::table('products')->find($id);
    return $product->name;
  }
+
+ function currency()
+ {
+   return \DB::table('currencies')->latest('id')->first();
+ }

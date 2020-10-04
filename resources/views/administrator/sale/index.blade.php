@@ -39,7 +39,6 @@
                         <th scope="col">Paid</th>
                         <th width="10%" scope="col">Total</th>
                         <th width="10%" scope="col">Status</th>
-                        <th width="10%" scope="col">Payment</th>
                         <th width="10%" scope="col">Action</th>
                       </tr>
                     </thead>
@@ -60,7 +59,6 @@
                                         <span class="badge badge-warning text-white">Pending</span>
                                       @endif
                                   </td>
-                                  <td>{{$sale->payment_type}}</td>
                                   <td>
                                       <div class="d-flex justify-content-start">
                                         <a href="{{ route('sale.show', [$sale->id]) }}" class="btn btn-sm btn-warning mr-2"><i class="fa fa-eye text-white" aria-hidden="true"></i></a>
@@ -91,7 +89,7 @@
       <div class="modal-body">
           <div class="form-group col-12">
             <label for="exampleFormControlFile1">Amout</label>
-            <input class="form-control form-control-lg" id="open-amount" type="text" placeholder="Amount">
+            <input class="form-control form-control-lg numeric"  id="open-amount" type="text" placeholder="Amount">
           </div>
       </div>
       <div class="modal-footer">

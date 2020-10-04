@@ -27,10 +27,11 @@
               let select = '';
               let total_as_riel = 0;
               let total_as_dollar = 0;
+              let currency =  {!! json_encode(currency()) !!}; 
 
               $.each(response, function(key, value) {
-                  total_as_dollar = value.total;
-                  total_as_riel = value.total * 4100;
+                  total_as_dollar += parseFloat(value.total);
+                  total_as_riel = total_as_dollar * currency.riel;
 
                   $.each(value.unit_name, function(k, v){
                       select += `<option value="${k}" selected>${v}</option>`
@@ -40,13 +41,13 @@
                           <tr>
                               <td scope="row" id="${value.id}">${key}</td>
                               <td>${value.name}<input type="hidden" name="id[]" value="${value.id}"/></td>
-                              <td><input class="form-control qty calculate" type="text" name="qty[]" value="${value.qty}"/></td>
+                              <td><input class="form-control qty calculate numeric" type="text" name="qty[]" value="${value.qty}"/></td>
                               <td>
                                   <select name="unit[]" class="select2 form-control" style="width:100%">
                                     ${select}
                                   </select>
                               </td>
-                              <td><input  class="form-control number calculate" type="text" name="cost[]" value="${value.cost}"/></td>
+                              <td><input  class="form-control number calculate" type="text" name="cost[]" value="${value.cost}" readonly/></td>
                               <td><input class="form-control" type="text" name="total[]" value="${value.total}"/ readonly></td>
                               <td class="text-center">
                               <a class="btn btn-xs btn-danger rm-cart" id="${value.id}"><i class="fa fa-minus text-white" style="color:red; font-size:17px;"></i></a>
@@ -56,8 +57,16 @@
               });
               $('tbody').html(tr);
               $('select').select2();
-              $('#total_as_dollar').val(total_as_dollar);
-              $('#total_as_riel').val(total_as_riel);
+              $('#total_as_dollar').val((total_as_dollar).toFixed(2));
+              $('#total_as_riel').val(total_as_riel.toFixed(2));
+
+              $(".numeric").on("keypress keyup blur",function (event) {
+        //this.value = this.value.replace(/[^0-9\.]/g,'');
+        $(this).val($(this).val().replace(/[^0-9\.]/g,''));
+          if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+          }
+      });
             }
         });
     }
@@ -75,7 +84,7 @@
           success: function (response) {
               if(response.message == 'warning'){
                   console.log(response);
-                  alert(response.data);
+                //   alert(response.data);
               }else{
                 getProduct();
               }
@@ -94,7 +103,7 @@
                   showWarningToast(response.data);
               }else{
                   getProduct();
-                  alert(response.data);
+                //   alert(response.data);
               }
           }
       });
@@ -111,7 +120,7 @@
                 success: function (response) {
                     if(response.message == 'success'){
                         getProduct();
-                        alert(response.data)
+                        // alert(response.data)
 
                         // showSuccessToast(response.data);
                     }

@@ -36,8 +36,7 @@ class SaleController extends Controller
     public function create()
     {
         $invoice_number = 'S00F'.time();
-        $products = Product::with('category', 'unit')->get();
-
+        $products = Product::with('category', 'image', 'unit')->get();
 
         return view('administrator.sale.create', compact('products', 'invoice_number'));
     }
@@ -107,9 +106,9 @@ class SaleController extends Controller
     public function show($id)
     {
         $sale = Sale::find($id);
-        $sale_detail = SaleDetail::where('sell_id', $id)->get();
-        // return $sale_detail;
-        return view('administrator.sale.show', compact('sale', 'sale_detail'));
+        $sale_detail = SaleDetail::where('sell_id', $id)->with('unit')->get();
+        $total = SaleDetail::where('sell_id', $id)->sum('total');
+        return view('administrator.sale.show', compact('sale', 'sale_detail', 'total'));
     }
 
     /**
@@ -157,9 +156,11 @@ class SaleController extends Controller
 
     public function addCard($id)
     {
+        // session()->forget('saleProduct');
         $product = Product::find($id);
         $product_unit = ProductUnit::where('product_id', $id)->where('qty_per_unit', 1)->first();
         $saleProduct = session()->get('saleProduct');
+        // 
         if($saleProduct){
             if(@$saleProduct[$id]){
                 return response()->json(['message' => 'warning', 'data' => 'Product adding is already exist!']);
@@ -169,7 +170,7 @@ class SaleController extends Controller
                     "name" => $product->name,
                     "qty" => 1,
                     "unit" => $product_unit->unit_id,
-                    "unit_name" => Unit::find($product_unit->unit_id)->pluck('name', 'id'),
+                    "unit_name" => Unit::where('id', $product_unit->unit_id)->pluck('name', 'id'),
                     "cost" => $product_unit->price,
                     "discount" => $product->product_discount,
                     "total" => $product_unit->price,
@@ -186,7 +187,7 @@ class SaleController extends Controller
                 "name" => $product->name,
                 "qty" => 1,
                 "unit" => $product_unit->unit_id,
-                "unit_name" => Unit::find($product_unit->unit_id)->pluck('name', 'id'),
+                "unit_name" => Unit::where('id', $product_unit->unit_id)->pluck('name', 'id'),
                 "cost" => $product_unit->price,
                 "discount" => $product->product_discount,
                 "total" => $product_unit->price,

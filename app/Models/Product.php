@@ -25,5 +25,10 @@ class Product extends Model
 
     public function unit() {
         return $this->hasOne('App\Models\Unit', 'id');
-    }    
+    }
+    
+    public function image()
+    {
+        return $this->hasOne('App\Models\ProductImage', 'product_id', 'id');
+    }
 }
