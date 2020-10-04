@@ -60,7 +60,7 @@
               </p>
             </a>
           </li>
-
+{{-- 
           <li class="nav-item">
             <a href="{{route('sale.index')}}" class="nav-link {{ \Request::is('admin/adjustment*') ? 'active' : '' }}">
               <i class="fa fa-adjust pr-2" aria-hidden="true"></i>
@@ -68,7 +68,7 @@
                 Adjustment
               </p>
             </a>
-          </li>
+          </li> --}}
 
           <li class="nav-item">
             <a href="{{route('units.index')}}" class="nav-link {{ \Request::is('admin/unit*') ? 'active' : '' }}">
@@ -111,6 +111,15 @@
               <i class="fas fa-user pr-2"></i>
               <p>
                 User
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{ route('currency.index') }}" class="nav-link {{ \Request::is('admin/currency*') ? 'active' : '' }}">
+              <i class="fas fa-money-bill pr-2"></i>
+              <p>
+                Currency
               </p>
             </a>
           </li>

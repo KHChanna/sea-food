@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('sale-update-product/{id}', 'SaleController@updateProduct')->name('sale.update-Cart');
 
     Route::resource('regisersale', 'RegisterSaleController');
+    Route::resource('currency', 'CurrencyController');
 
 });
 

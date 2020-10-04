@@ -18,15 +18,14 @@ use Illuminate\Support\Facades\Route;
 //     return 'hellp';
 // });
 
-Route::get('/', function(){
-    return view('welcome');
-});
+// Route::get('/', function(){
+//     return view('welcome');
+// });
 
-Route::get('/login', 'Auth\LoginController@loginForm')->name('login.form');
+Route::get('/', 'Auth\LoginController@loginForm')->name('login.form');
 Route::post('/login', 'Auth\LoginController@authenticated')->name('login');
 
 Route::get('register', 'Auth\RegisterController@registerForm')->name('register.form');
 Route::post('register', 'Auth\RegisterController@register')->name('register');
 
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
-

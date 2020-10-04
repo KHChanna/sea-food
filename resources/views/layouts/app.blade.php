@@ -101,5 +101,17 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('/dist/js/demo.js') }}"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+      $(".numeric").on("keypress keyup blur",function (event) {
+        //this.value = this.value.replace(/[^0-9\.]/g,'');
+        $(this).val($(this).val().replace(/[^0-9\.]/g,''));
+          if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+          }
+      });
+    });
+</script>
 </body>
 </html>

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
-use App\Models\Unit;
+use App\Modesl\Currency;
 use Illuminate\Http\Request;
 
-class UnitController extends Controller
+class CurrencyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class UnitController extends Controller
     public function index()
     {
         //
-        $units = Unit::all();
-        return view('administrator.unit.index', compact('units'));
+        $currency = Currency::whereNull('deleted_at')->latest('id')->get();
+        return view('administrator.currency.index', compact('currency'));
     }
 
     /**
@@ -28,7 +28,7 @@ class UnitController extends Controller
     public function create()
     {
         //
-        return view('administrator.unit.create');
+        return view('administrator.currency.create');
     }
 
     /**
@@ -40,9 +40,13 @@ class UnitController extends Controller
     public function store(Request $request)
     {
         //
-        Unit::create($request->all());
+        // dd($request->all());
+        Currency::create( [
+            'dollar'    =>      1,
+            'riel'      =>      $request->riel,
+        ] );
 
-        return redirect()->route('units.index');
+        return redirect()->route('currency.index');
     }
 
     /**
@@ -62,10 +66,11 @@ class UnitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Unit $unit)
+    public function edit($id)
     {
         //
-        return view('administrator.unit.edit', compact('unit'));
+        $currency = Currency::find($id)->first();
+        return view('administrator.currency.edit', compact('currency'));
     }
 
     /**
@@ -78,10 +83,14 @@ class UnitController extends Controller
     public function update(Request $request, $id)
     {
         //
-        Unit::find($id)->update($request->all());
-
-        return redirect()->route('units.index');
-    }
+        // dd($request->all());
+        Currency::find($id)->update( [
+            'dollar'    =>      1,
+            'riel'      =>      $request->riel,
+        ] );
+        
+        return redirect()->route('currency.index');
+    }   
 
     /**
      * Remove the specified resource from storage.
@@ -91,7 +100,6 @@ class UnitController extends Controller
      */
     public function destroy($id)
     {
-        //
-        Unit::find($id)->delete();
+        Currency::find($id)->delete();
     }
 }
