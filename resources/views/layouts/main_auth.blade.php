@@ -17,7 +17,6 @@
         body{
         }
     </style> -->
-    <!-- {{ asset('2725037.jpg') }} -->
 </head>
 <body>
     @yield('content')
