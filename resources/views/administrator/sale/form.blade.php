@@ -127,7 +127,7 @@
                   <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                       <div class="form-group">
                           <label>បញ្ចុះតំលៃសរុប(%):</label>
-                          <input type="text" id="purchase_total_dis" value="0" name="purchase_total_dis" class="form-control number-only discount" maxlength="3" placeholder="Total Discount" maxlength="3">
+                          <input type="text" id="purchase_total_dis" value="0" name="purchase_total_dis" class="form-control numeric discount" maxlength="3" placeholder="Total Discount" maxlength="3">
                           @if($errors->has('purchase_total_dis'))
                               <span class="invalid-feedback" role="alert">
                                   <strong>{!! $errors->first('purchase_total_dis') !!}</strong>

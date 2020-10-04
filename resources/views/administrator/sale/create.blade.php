@@ -152,7 +152,7 @@
     updateProduct($(this));
   });
 
-  function updateProduct(e){
+    function updateProduct(e){
             var id = $(e).closest('tr').find('input[name="id[]"]').val();
             var qty = $(e).closest('tr').find('input[name="qty[]"]').val();
             var unit = $(e).closest('tr').find('select[name="unit[]"]').val();
@@ -185,7 +185,21 @@
                     }
                 }
             });
-        }
+    }
     
+    $(document).on('blur', '#purchase_total_dis', function() {
+        getProduct();
+
+        setTimeout(function(){ 
+            let total_us = $('#total_as_dollar').val();
+            var total = parseFloat(total_us) - ( ( parseFloat(total_us) * parseFloat($('#purchase_total_dis').val()) ) / 100);
+            let currency =  {!! json_encode(currency()) !!}; 
+            console.log(total);
+
+            $('#total_as_dollar').val(total.toFixed(2));
+            $('#total_as_riel').val( (total * currency.riel).toFixed(2) );
+         }, 500);
+        
+    });
 </script>
 @endsection

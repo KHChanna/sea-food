@@ -16,14 +16,14 @@
             <div class="col-sm-2">Invoice Number</div>
             <div class="col-sm-2">: {{$sale->invoice_number}}</div>
             <div class="col-sm-2">Total</div>
-            <div class="col-sm-2">: {{$total}}</div>
+            <div class="col-sm-2">: {{$total}} $</div>
         </div>
 
         <div class="row mb-1">
             <div class="col-sm-2">Code</div>
             <div class="col-sm-2">: {{$sale->code}}</div>
             <div class="col-sm-2">Total Paid</div>
-            <div class="col-sm-2">: {{$sale->paid_amount}}</div>
+            <div class="col-sm-2">: {{$sale->paid_amount}} $</div>
         </div>
 
         <div class="row mb-1">
@@ -65,11 +65,17 @@
                             <td>{{product($item->product_id) ?? ''}}</td>
                             <td>{{$item->unit->name ?? ''}}</td>
                             <td>{{$item->qty}}</td>
-                            <td>{{$item->price}}</td>
-                            <td>{{$item->total}}</td>
+                            <td>{{$item->price}} $</td>
+                            <td>{{$item->total}} $</td>
                         </tr>
                     @endforeach
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5" class="text-right">Total</td>
+                        <td>{{$total}} $</td>
+                    </tr>
+                </tfoot>
               </table>
         </div>
     </div>
