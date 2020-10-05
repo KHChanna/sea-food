@@ -44,5 +44,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('regisersale', 'RegisterSaleController');
     Route::resource('currency', 'CurrencyController');
 
+    Route::resource('payment-type', 'PaymentTypeController');
 });
 

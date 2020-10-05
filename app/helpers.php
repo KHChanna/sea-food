@@ -57,36 +57,23 @@
 
  function PaymentType()
  {
-   return [ 1 => 'Cash On hand', 2 => 'ABA', 3 => 'Wing', 4 => 'ACELEDA' ];
+   return DB::table('payment_types')->pluck('name', 'id');
+  //  return [ 1 => 'Cash On hand', 2 => 'ABA', 3 => 'Wing', 4 => 'ACELEDA' ];
  }
 
  function Payment($id)
  {
-    $payment = '';
-    switch ($id) {
-      case 2:
-        $payment = 'ABA';
-        break;
-      case 3:
-        $payment = 'Wing';
-        break;
-      case 4:
-        $payment = 'ACELEDA';
-      break;
-      default:
-      $payment = 'Cash On hand';
-    }
-
-    return $payment;
+    $payment_type = DB::table('payment_types')->where('id', $id)->first();
+    return $payment_type->name;
  }
 
  function product($id)
  {
-   $product = \DB::table('products')->find($id);
+   $product = DB::table('products')->find($id);
    return $product->name;
  }
 
  function currency()
  {
-   return \DB::table('currencies')->latest('id')->first();
+   return DB::table('currencies')->latest('id')->first();
  }

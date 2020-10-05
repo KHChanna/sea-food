@@ -125,7 +125,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link {{ \Request::is('admin/registry*') ? 'active' : '' }}">
+            <a href="{{route('payment-type.index')}}" class="nav-link {{ \Request::is('admin/payment-type*') ? 'active' : '' }}">
               <i class="fas fa-wallet pr-2"></i>
               <p>
                 Payment Type
