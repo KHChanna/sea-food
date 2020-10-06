@@ -30,7 +30,7 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>{{ number_format($sale_detail, 2) }} $</h3>
+                    <h3>{{ number_format( @$sale_detail ?? 0, 2) }} $</h3>
 
                     <p>Daily Income</p>
                 </div>
@@ -45,7 +45,7 @@
                 <!-- small box -->
                 <div class="small-box bg-success">
                 <div class="inner">
-                    <h3>{{$products}}<sup style="font-size: 20px"></sup></h3>
+                    <h3>{{ @$products ?? 0}}<sup style="font-size: 20px"></sup></h3>
 
                     <p>Products</p>
                 </div>
@@ -60,7 +60,7 @@
                 <!-- small box -->
                 <div class="small-box bg-warning">
                 <div class="inner">
-                    <h3>{{$suppliers}}</h3>
+                    <h3>{{@$suppliers ?? 0}}</h3>
 
                     <p>Supplier</p>
                 </div>
@@ -70,6 +70,7 @@
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
+            
             <!-- ./col -->
            
             <!-- ./col -->
@@ -100,12 +101,12 @@
   <script>
     var ctx = document.getElementById('week');
     var myChart = new Chart(ctx, {
-        type: 'line',
+        type: 'pie',
         data: {
             labels: ['Week1', 'Week2', 'Week3', 'Week4'],
             datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
+                label: 'Sale',
+                data: [12, 19, 3, 5],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -134,12 +135,12 @@
 
     var year = document.getElementById('year');
     var myChart = new Chart(year, {
-        type: 'pie',
+        type: 'line',
         data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'August', 'Sept', 'Oct', 'Nov', 'Dec'],
             datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
+                label: 'Sale of Year',
+                data: [12, 19, 3, 5, 2, 3, 5, 6, 8, 10, 11, 2],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
