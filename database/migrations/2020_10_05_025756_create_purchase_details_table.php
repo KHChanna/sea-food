@@ -17,6 +17,8 @@ class CreatePurchaseDetailsTable extends Migration
             $table->id();
             $table->integer('product_id');
             $table->integer('purchase_id');
+            $table->integer('unit_id');
+            $table->integer('qty');
             $table->decimal('price');
             $table->timestamps();
         });

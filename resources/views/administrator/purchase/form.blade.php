@@ -137,12 +137,12 @@
                   </div>
                   
                   <hr>
-                  {{-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                       <div class="form-group">
                           <label class="required">អ្នកផ្គត់ផ្គង់</label>
                           {!! Form::select('supplier', supplier(), @$productUnit ? $productUnit->unit_id:'', ['placeholder' => 'Pick Supplier','class' => 'form-control select2', 'style' => 'width: 100%']) !!}
                       </div>
-                  </div> --}}
+                  </div>
 
                   <hr>
                   <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">

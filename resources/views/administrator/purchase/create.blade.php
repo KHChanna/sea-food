@@ -6,10 +6,10 @@
 <div class="content-wrapper">
     <div class="container h-100" style="background-color: #fff">
       <div class="row my-4 p-2">
-        <form class="m-0 w-100" action="{{ route('sale.store') }}" method="post">
+        <form class="m-0 w-100" action="{{ route('purchase.store') }}" method="post">
             @csrf
             @method('POST')
-            @include('administrator.sale.form')
+            @include('administrator.purchase.form')
           </form>
       </div>
     </div>
@@ -18,7 +18,7 @@
 <script>
     function getProduct(){
         $.ajax({
-            url: '{!! route("sale.get-Cart") !!}',
+            url: '{!! route("purchase.get-Cart") !!}',
             method: "get",
             dataType: 'json',
             success: function (response) {
@@ -78,7 +78,7 @@
     $(document).on('click', '.my-card', function(){
       var id = $(this).attr('id');
       $.ajax({
-          url: "{{ url('admin/sale/add-cart') }}" + '/' + id,
+          url: "{{ url('admin/purchase/add-cart') }}" + '/' + id,
           method: "get",
           dataType: 'json',
           success: function (response) {
@@ -95,7 +95,7 @@
     $(document).on('click', '.rm-cart', function(){
       var id = $(this).attr('id');
       $.ajax({
-          url: '{!! url("admin/sale-remove-product/'+id+'") !!}',
+          url: '{!! url("admin/purchase-remove-product/'+id+'") !!}',
           method: "get",
           dataType: 'json',
           success: function (response) {
@@ -111,7 +111,7 @@
 
     $(document).on('click', '#remove-all-product',function () {
             $.ajax({
-                url: '{!! route("sale.remove-all-Cart") !!}',
+                url: '{!! route("purchase.remove-all-Cart") !!}',
                 method: "POST",
                 data:{
                     _token: '{{ csrf_token() }}',
@@ -163,7 +163,7 @@
             // var purchase_total_dis = $('#purchase_total_dis').val();
             // var qtyUnit = $(e).closest('tr').find('select[name="unit[]"]').find('option:selected').attr('qtyUnit');
             $.ajax({
-                url: '{!! url("admin/sale-update-product/'+id+'") !!}',
+                url: '{!! url("admin/purchase-update-product/'+id+'") !!}',
                 method: "post",
                 data:{
                     _token: '{{ csrf_token() }}',

@@ -5,7 +5,7 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <div class="container pt-3">
-        <h4 class="">Manage Categories</h4>
+        <h4 class="">Manage Sale</h4>
         <div class="d-flex d-background">
             <div>
                 <nav aria-label="breadcrumb">

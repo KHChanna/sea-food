@@ -18,7 +18,7 @@ class CreatePurchasesTable extends Migration
             $table->integer('supplier_id');
             $table->string('code');
             $table->string('invoice_number');
-            $table->date('sale_date');
+            $table->date('date');
             $table->decimal('paid_amount');
             $table->decimal('order_amount');
             $table->decimal('total');

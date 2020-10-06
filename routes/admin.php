@@ -45,5 +45,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('currency', 'CurrencyController');
 
     Route::resource('payment-type', 'PaymentTypeController');
+    
+    Route::resource('purchase', 'PurchaseController');
+    Route::get('purchase/add-cart/{id}', 'PurchaseController@addCard')->name('purchase.addCart');
+    Route::get('purchase-get-product', 'PurchaseController@getCart')->name('purchase.get-Cart');
+    Route::get('purchase-remove-product/{id}', 'PurchaseController@removeCart')->name('purchase.remove-Cart');
+    Route::post('purchase-remove-all-product', 'PurchaseController@removeCartAll')->name('purchase.remove-all-Cart');
+    Route::post('purchase-update-product/{id}', 'PurchaseController@updateProduct')->name('purchase.update-Cart');
 });
 

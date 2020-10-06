@@ -5,23 +5,19 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <div class="container pt-3">
-        <h4 class="">Manage Categories</h4>
+        <h4 class="">Manage Purchase</h4>
         <div class="d-flex d-background">
             <div>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb pull-left mb-0">
                       <li class="breadcrumb-item"><a href="#">Home</a></li>
-                      <li class="breadcrumb-item"><a href="#">Manage Sale</a></li>
+                      <li class="breadcrumb-item"><a href="#">Manage Purchase</a></li>
                       {{-- <li class="breadcrumb-item active" aria-current="page"></li> --}}
                     </ol>
                 </nav>
             </div>
             <div class="ml-auto p-2 ">
-              @if (count($regiseration) > 0)
-                <a href="{{ route('sale.create') }}"  class="btn btn-primary pull-right" >New Sale</a>
-              @else 
-                <a class="btn btn-primary pull-right " data-toggle="modal" data-target="#exampleModalCenter">Open Balance</a>
-              @endif
+                <a href="{{ route('purchase.create') }}"  class="btn btn-primary pull-right" >New Purchase</a>
             </div>
           </div>
     </div>
@@ -35,25 +31,25 @@
                         <th scope="col" width="8%">#</th>
                         <th scope="col">Invoice Number</th>
                         <th scope="col">Code</th>
-                        <th scope="col">Sale Date</th>
-                        <th scope="col">Paid</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Supplier</th>
                         <th width="10%" scope="col">Total</th>
                         <th width="10%" scope="col">Status</th>
                         <th width="10%" scope="col">Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                        @if (@$sales)
-                            @foreach ($sales as $key => $sale)
+                        @if (@$purchases)
+                            @foreach ($purchases as $key => $value)
                                 <tr>
                                   <td>{{$key + 1}}</td>
-                                  <td>{{$sale->invoice_number}}</td>
-                                  <td>{{$sale->code}}</td>
-                                  <td>{{$sale->sale_date}}</td>
-                                  <td>{{$sale->paid_amount}}</td>
-                                  <td>{{$sale->total}}</td>
+                                  <td>{{$value->invoice_number}}</td>
+                                  <td>{{$value->code}}</td>
+                                  <td>{{$value->date}}</td>
+                                  <td>{{$value->supplier->name ?? ''}}</td>
+                                  <td>{{$value->total}}</td>
                                   <td>
-                                      @if ($sale->payment_status == 1)
+                                      @if ($value->payment_status == 1)
                                         <span class="badge badge-success text-white">Paid</span>
                                       @else
                                         <span class="badge badge-warning text-white">Pending</span>
@@ -61,9 +57,9 @@
                                   </td>
                                   <td>
                                       <div class="d-flex justify-content-start">
-                                        <a href="{{ route('sale.show', [$sale->id]) }}" class="btn btn-sm btn-warning mr-2"><i class="fa fa-eye text-white" aria-hidden="true"></i></a>
+                                        <a href="{{ route('purchase.show', [$value->id]) }}" class="btn btn-sm btn-warning mr-2"><i class="fa fa-eye text-white" aria-hidden="true"></i></a>
                                  
-                                            <button data-id="{{$sale->id}}" class="btn btn-sm btn-danger btn-delete"><i class="fas fa-trash-alt"></i></button>
+                                            <button data-id="{{$value->id}}" class="btn btn-sm btn-danger btn-delete"><i class="fas fa-trash-alt"></i></button>
                                       </div>
                                   </td>
                                 </tr>
@@ -142,7 +138,7 @@
             .then((willDelete) => {
               if (willDelete) {
                 let id = ($(this).attr('data-id'));
-                let route = "{{ route('sale.destroy', ['id']) }}";
+                let route = "{{ route('purchase.destroy', ['id']) }}";
                 var token = $("meta[name='csrf-token']").attr("content");
                
                 $.ajax({

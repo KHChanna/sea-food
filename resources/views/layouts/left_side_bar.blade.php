@@ -44,7 +44,7 @@
           </li> --}}
 
           <li class="nav-item">
-            <a href="#" class="nav-link {{ \Request::is('admin/purchase*') ? 'active' : '' }}">
+            <a href="{{route('purchase.index')}}" class="nav-link {{ \Request::is('admin/purchase*') ? 'active' : '' }}">
               <i class="fas fa-shopping-cart pr-2"></i>
               <p>
                 Purchase
