@@ -134,7 +134,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link {{ \Request::is('admin/registry*') ? 'active' : '' }}">
+            <a href="#" class="nav-link {{ \Request::is('admin/report*') ? 'active' : '' }}">
               <i class="fas fa-chart-bar pr-2"></i>
               <p>
                 Report
@@ -143,13 +143,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/layout/top-nav.html" class="nav-link">
+                <a href="{{ route('report.sale') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Sale Report</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                <a href="{{ route('report.purchase') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Purchase Report</p>
                 </a>

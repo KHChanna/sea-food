@@ -52,5 +52,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('purchase-remove-product/{id}', 'PurchaseController@removeCart')->name('purchase.remove-Cart');
     Route::post('purchase-remove-all-product', 'PurchaseController@removeCartAll')->name('purchase.remove-all-Cart');
     Route::post('purchase-update-product/{id}', 'PurchaseController@updateProduct')->name('purchase.update-Cart');
+
+    // report
+    Route::get('report-sale', 'ReportController@sale')->name('report.sale');
+    Route::get('report-purchase', 'ReportController@purchase')->name('report.purchase');
 });
 
