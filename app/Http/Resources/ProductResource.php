@@ -26,8 +26,10 @@ class ProductResource extends JsonResource
             'code'      =>      $this->code,
             'name'      =>      $this->name,
             'category'  =>      Category::find($this->category_id)->first() ? Category::find($this->category_id)->first()->name : '',
-            'unit_name' =>      $product_unit->unit ? $product_unit->unit->name : 'None',
-            'price'     =>      $product_unit->price ?? 0.00,
+            'units'     =>      [
+                                    'unit_name' => $product_unit->unit ? $product_unit->unit->name : 'None',
+                                    'price'     => $product_unit->price ?? 0.00
+            ],
             'image'     =>      ProductImage::where('product_id', $this->id)->first() ? asset('/uploads/images/products/'. ProductImage::where('product_id', $this->id)->first()->image) : '',
         ];
     }
