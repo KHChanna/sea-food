@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
+use App\Models\ProductImage;
+use App\Models\ProductUnit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -40,25 +42,51 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // validation
-        // $validator = Validator::make($request->all(), [
-        //     'code' => 'required|string',
-        //     'name' => 'required|string',
-        //     'category_id' => 'required|numeric',
-        //     'unit_id' => 'required|numeric',
-        // ]);
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:products,name',
+            'category_id' => 'required|numeric',
+            'unit_id' => 'required|numeric',
+            'price' => 'required|numeric',
+        ]);
 
-        // if ($validator->fails()) {
-        //     $data = [
-        //         'status' => '0',
-        //         'messages' => $validator->messages()->get('*')
-        //     ];
-        //     return response()->json($data);
-        // }
+        if ($validator->fails()) {
+            $data = [
+                'status' => false,
+                'messages' => $validator->errors()
+            ];
+            return response()->json($data);
+        }
 
-       
 
-        // return response()->json(['messages' => 'Category Created Successfully']);
+        $code = 'P001' . time();
+        $product = Product::create( [
+            'name'              =>      $request->name,
+            'category_id'       =>      $request->category_id,
+            'code'              =>      $code,
+            'description'       =>      $request->description ?? '',
+        ] );
+
+        ProductUnit::create( [
+            'product_id'        =>      $product->id,
+            'unit_id'           =>      $request->unit_id,
+            'qty_per_unit'      =>      1,
+            'unit_type'         =>      'parent',
+            'price'             =>      $request->price
+        ] );
+
+        if( isset($request->image) ) 
+        {
+            $filename = uniqid().time().'.'.$request->image->getClientOriginalExtension();
+            $path = public_path('/uploads/images/products');
+            $request->image->move($path, $filename);
+
+            ProductImage::create( [
+                'product_id'    =>      $product->id,
+                'image'         =>      $filename,
+            ] );
+        }
+
+        return response()->json(['status' => 201, 'messages' => 'Product Store Successfully']);
     }
 
     /**
