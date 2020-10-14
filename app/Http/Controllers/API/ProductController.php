@@ -128,6 +128,51 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:products,name,'.$id,
+            'category_id' => 'required|numeric',
+            'unit_id' => 'required|numeric',
+            'price' => 'required|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            $data = [
+                'status' => false,
+                'messages' => $validator->errors()
+            ];
+            return response()->json($data);
+        }
+
+        try {
+            $code = 'P001' . time();
+            Product::find($id)->update( [
+                'name'              =>      $request->name,
+                'category_id'       =>      $request->category_id,
+                'code'              =>      $code,
+                'description'       =>      $request->description ?? '',
+            ] );
+    
+            ProductUnit::where('product_id', $id)->update( [
+                'unit_id'           =>      $request->unit_id,
+                'price'             =>      $request->price
+            ] );
+    
+            if( isset($request->image) ) 
+            {
+                $filename = uniqid().time().'.'.$request->image->getClientOriginalExtension();
+                $path = public_path('/uploads/images/products');
+                $request->image->move($path, $filename);
+    
+                ProductImage::where('product_id', $id)->update( [
+                    'image'         =>      $filename,
+                ] );
+            }
+        $product = Product::where('id', $id)->get();
+        return ProductResource::collection($product)->response()->setStatusCode(200);
+
+        } catch (Exception $e) {
+            return response()->json(['status' => 400, 'message' => $e->getMessage()]);
+        }
     }
 
     /**
