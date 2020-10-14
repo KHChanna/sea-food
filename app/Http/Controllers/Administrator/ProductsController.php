@@ -30,7 +30,8 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view('administrator.product.create');
+        $code = 'P00CA' . time();
+        return view('administrator.product.create', compact('code'));
     }
 
     /**

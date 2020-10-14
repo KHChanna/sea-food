@@ -16,6 +16,16 @@
 </div>
 
 <script>
+    $(document).ready(function(){
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = mm + '/' + dd + '/' + yyyy;
+        console.log($('#datepicker-popup'));
+        $('#datepicker-popup').attr('value', today);
+    });
     function getProduct(){
         $.ajax({
             url: '{!! route("sale.get-Cart") !!}',
@@ -201,5 +211,7 @@
          }, 500);
         
     });
+
+
 </script>
 @endsection

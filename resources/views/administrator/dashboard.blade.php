@@ -28,6 +28,22 @@
             <div class="row">
             <div class="col-lg-4 col-6">
                 <!-- small box -->
+                <div class="small-box bg-primary">
+                <div class="inner">
+                    <h3>{{ number_format( @$registry->open_balance ?? 0, 2) }} $</h3>
+                    {{-- <h3>{{ number_format( @$registry ?? 0, 2) }} $</h3> --}}
+
+                    <p>Open Balance</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-wallet"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-6">
+                <!-- small box -->
                 <div class="small-box bg-info">
                 <div class="inner">
                     <h3>{{ number_format( @$sale_detail ?? 0, 2) }} $</h3>
@@ -35,7 +51,7 @@
                     <p>Daily Income</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-bag"></i>
+                    <i class="fas fa-dollar-sign"></i>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
@@ -56,20 +72,7 @@
                 </div>
             </div>
             <!-- ./col -->
-            <div class="col-lg-4 col-6">
-                <!-- small box -->
-                <div class="small-box bg-warning">
-                <div class="inner">
-                    <h3>{{@$suppliers ?? 0}}</h3>
-
-                    <p>Supplier</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-person-add"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                </div>
-            </div>
+            
             
             <!-- ./col -->
            

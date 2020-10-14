@@ -94,6 +94,9 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         //
+        Category::find($id)->delete();
+
+        return response()->json(200);
     }
 
     public function findCategoryCriteria() {

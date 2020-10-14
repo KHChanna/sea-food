@@ -156,7 +156,7 @@
                           @endif
                       </div>
                   </div>
-                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                  {{-- <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                     <div class="form-group">
                         <label class="required">Code</label>
                       <input type="text" name="code" class="form-control" value="" required autocomplete="off" >
@@ -165,7 +165,7 @@
                                 <strong>{!! $errors->first('invoice') !!}</strong>
                             </span>
                         @endif
-                    </div>
+                    </div> --}}
                 </div>
 
                   <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">

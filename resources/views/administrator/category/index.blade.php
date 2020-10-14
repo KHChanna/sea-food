@@ -80,7 +80,7 @@
             .then((willDelete) => {
               if (willDelete) {
                 let id = ($(this).attr('data-id'));
-                let route = "{{ route('supplier.destroy', ['id']) }}";
+                let route = "{{ route('category.destroy', ['id']) }}";
                 var token = $("meta[name='csrf-token']").attr("content");
                
                 $.ajax({
@@ -91,8 +91,9 @@
                       "_method":"DELETE",
                       "_token": token,
                   },
-                  success: function (){
-                    window.location.reload();
+                  success: function (response){
+                    if (response == 200)
+                        window.location.reload();
                   },
                   error: function(){
                   }

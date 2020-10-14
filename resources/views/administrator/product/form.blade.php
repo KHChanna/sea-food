@@ -14,7 +14,7 @@
 
 <div class="form-group">
   <label for="inputAddress">Code</label>
-  <input type="text" class="form-control" id="inputAddress" placeholder="Code" value="{{ @$product->code ?? '' }}" name="code" required>
+  <input type="text" class="form-control" id="inputAddress" placeholder="Code" value="{{ @$product->code ?? @$code }}" name="code" required readonly>
 </div>
 
 <div class="form-group">

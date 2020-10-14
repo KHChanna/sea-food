@@ -32,6 +32,7 @@
                         <th scope="col" width="8%">#</th>
                         <th scope="col">Dollar</th>
                         <th scope="col">Riel</th>
+                        <th scope="col">Created</th>
                         <th width="10%" scope="col">Action</th>
                       </tr>
                     </thead>
@@ -42,6 +43,7 @@
                                   <td>{{++$key}}</td>
                                   <td>{{$value->dollar}}</td>
                                   <td>{{$value->riel}}</td>
+                                  <td>{{$value->created_at}}</td>
                                   <td>
                                       <div class="d-flex justify-content-start">
                                         <a href="{{ route('currency.edit', [$value->id]) }}" class="btn btn-sm btn-warning mr-2"><i class="fa fa-edit text-white"></i></a>

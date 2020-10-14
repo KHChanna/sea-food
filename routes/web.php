@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', 'Auth\LoginController@loginForm')->name('login.form');
+Route::get('/home', 'Auth\LoginController@loginForm')->name('login.form');
 Route::post('/login', 'Auth\LoginController@authenticated')->name('login');
 
 Route::get('register', 'Auth\RegisterController@registerForm')->name('register.form');

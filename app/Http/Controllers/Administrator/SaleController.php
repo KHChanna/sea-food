@@ -59,7 +59,7 @@ class SaleController extends Controller
             return redirect()->route('sale.index')->withErrors(['error' => 'Your Have not yet open balance.']);
 
         $sale = Sale::create( [
-            'code'              =>  $request->code,
+            'code'              =>  0,
             'invoice_number'    => $request->invoice,
             'sale_date'         =>  Carbon::parse($request->next_payment),
             'paid_amount'       =>  $request->paid_as_dollar ?? 0,
