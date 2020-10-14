@@ -144,11 +144,9 @@ class ProductController extends Controller
         }
 
         try {
-            $code = 'P001' . time();
             Product::find($id)->update( [
                 'name'              =>      $request->name,
                 'category_id'       =>      $request->category_id,
-                'code'              =>      $code,
                 'description'       =>      $request->description ?? '',
             ] );
     
