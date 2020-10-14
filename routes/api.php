@@ -28,12 +28,14 @@ use Illuminate\Support\Facades\Route;
         // Category
         Route::get('categories/count', 'API\CategoryController@count');
         Route::apiResource('categories', 'API\CategoryController');
+        Route::post('categories', 'API\CategoryController@update');
         // Product
         Route::get('products/count', 'API\ProductController@getCountProduct');
         Route::apiResource('products', 'API\ProductController');
         // Supplier
         Route::get('suppliers/count', 'API\SupplierController@count');
         Route::apiResource('suppliers', 'API\SupplierController');
+        Route::post('suppliers/{id}', 'API\SupplierController@update');
     });
 
 // Route::get('/products/list', 'Administrator\ProductsController@findProductsCriteria');

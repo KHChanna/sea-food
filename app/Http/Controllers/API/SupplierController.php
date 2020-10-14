@@ -39,7 +39,14 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $supplier = Supplier::create( [
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'address' => $request->address,
+        ] );
+
+        return response()->json(['data' => $supplier]);
     }
 
     /**
@@ -74,7 +81,11 @@ class SupplierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $supplier = Supplier::find($id);
+        
+        $supplier->update($request->all());
+        
+        return response()->json(['data' => $supplier]);
     }
 
     /**
