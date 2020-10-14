@@ -41,7 +41,7 @@ class CategoryController extends Controller
         return response()->json(['data' => $category]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
 
     }

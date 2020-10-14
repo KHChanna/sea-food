@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Route;
         // Category
         Route::get('categories/count', 'API\CategoryController@count');
         Route::apiResource('categories', 'API\CategoryController');
-        Route::post('categories', 'API\CategoryController@update');
+        Route::post('categories/{id}', 'API\CategoryController@update');
         // Product
         Route::get('products/count', 'API\ProductController@getCountProduct');
         Route::apiResource('products', 'API\ProductController');
@@ -36,6 +36,9 @@ use Illuminate\Support\Facades\Route;
         Route::get('suppliers/count', 'API\SupplierController@count');
         Route::apiResource('suppliers', 'API\SupplierController');
         Route::post('suppliers/{id}', 'API\SupplierController@update');
+
+        // Unit
+        Route::get('units', 'API\UnitController@index');
     });
 
 // Route::get('/products/list', 'Administrator\ProductsController@findProductsCriteria');
