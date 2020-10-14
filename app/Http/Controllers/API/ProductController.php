@@ -7,6 +7,7 @@ use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductUnit;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -57,36 +58,40 @@ class ProductController extends Controller
             return response()->json($data);
         }
 
-
-        $code = 'P001' . time();
-        $product = Product::create( [
-            'name'              =>      $request->name,
-            'category_id'       =>      $request->category_id,
-            'code'              =>      $code,
-            'description'       =>      $request->description ?? '',
-        ] );
-
-        ProductUnit::create( [
-            'product_id'        =>      $product->id,
-            'unit_id'           =>      $request->unit_id,
-            'qty_per_unit'      =>      1,
-            'unit_type'         =>      'parent',
-            'price'             =>      $request->price
-        ] );
-
-        if( isset($request->image) ) 
-        {
-            $filename = uniqid().time().'.'.$request->image->getClientOriginalExtension();
-            $path = public_path('/uploads/images/products');
-            $request->image->move($path, $filename);
-
-            ProductImage::create( [
-                'product_id'    =>      $product->id,
-                'image'         =>      $filename,
+        try {
+            $code = 'P001' . time();
+            $product = Product::create( [
+                'name'              =>      $request->name,
+                'category_id'       =>      $request->category_id,
+                'code'              =>      $code,
+                'description'       =>      $request->description ?? '',
             ] );
-        }
+    
+            ProductUnit::create( [
+                'product_id'        =>      $product->id,
+                'unit_id'           =>      $request->unit_id,
+                'qty_per_unit'      =>      1,
+                'unit_type'         =>      'parent',
+                'price'             =>      $request->price
+            ] );
+    
+            if( isset($request->image) ) 
+            {
+                $filename = uniqid().time().'.'.$request->image->getClientOriginalExtension();
+                $path = public_path('/uploads/images/products');
+                $request->image->move($path, $filename);
+    
+                ProductImage::create( [
+                    'product_id'    =>      $product->id,
+                    'image'         =>      $filename,
+                ] );
+            }
 
-        return response()->json(['status' => 201, 'messages' => 'Product Store Successfully']);
+        return ProductResource::collection([$product])->response()->setStatusCode(200);
+
+        } catch (Exception $e) {
+            return response()->json(['status' => 400, 'message' => $e->getMessage()]);
+        }
     }
 
     /**
@@ -98,8 +103,8 @@ class ProductController extends Controller
     public function show($id)
     {
         //
-        $product = Product::find($id)->get();
-        return ProductResource::collection($product);
+        $product = Product::where('id', $id)->first();
+        return ProductResource::collection([$product]);
     }
 
     /**
