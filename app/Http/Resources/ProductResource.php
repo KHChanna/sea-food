@@ -21,11 +21,12 @@ class ProductResource extends JsonResource
     public function toArray($request)
     {
         $product_unit = ProductUnit::where('product_id', $this->id)->first();
+        $category = Category::find($this->id);
         return [
             'id'        =>      $this->id,
             'code'      =>      $this->code,
             'name'      =>      $this->name,
-            'category'  =>      Category::find($this->category_id)->first() ? Category::find($this->category_id)->first()->name : '',
+            'category'  =>      $category->name ?? 'None',
             'units'     =>      [
                                     'unit_name' => $product_unit->unit ? $product_unit->unit->name : 'None',
                                     'price'     => $product_unit->price ?? 0.00
