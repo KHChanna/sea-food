@@ -44,6 +44,7 @@ use Illuminate\Support\Facades\Route;
         //profile
         // Route::get('/me', 'API\Auth\LoginController@profile');
         Route::apiResource('/me', 'API\UserController');
+        Route::post('/me/{id}', 'API\UserController@update');
         // home screen
         Route::apiResource('/home', 'API\HomeController');
 
