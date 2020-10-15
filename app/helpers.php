@@ -85,7 +85,7 @@
         return 'Male';
         break;
       case 2:
-        return 'Male';
+        return 'Female';
         break;
      default:
         return 'None';

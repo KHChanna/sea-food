@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Sale;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -17,12 +18,22 @@ class HomeController extends Controller
     public function index()
     {
         //
+
+        $startOfCurrentWeek = Carbon::now()->startOfWeek(); 
+
+        $startOfLastWeek  = $startOfCurrentWeek->copy()->subDays(8);
+        $startOfLastWeek  = Carbon::now()->subDays(7)->startOfWeek();
+
+        return $startOfLastWeek;
+        //  ; // 2016-10-23 23:59:59.000000
+
         $currentDate = Carbon::now();
         // $agoDate = $currentDate->dayOfWeek;// gives 2016-01-31
-        $agoDate = $currentDate->subDays($currentDate->dayOfWeek)->subWeek();// gives 2016-01-31
-        $weekend = $agoDate->endOfWeek()->format('Y-m-d H:i');
-
-        return $agoDate;
+        $last_start_week = $currentDate->subDays($currentDate->dayOfWeek)->subWeek();// gives 2016-01-31
+        $last_end_week = $currentDate->subDays($currentDate->dayOfWeek)->endOfWeek();// gives 2016-01-31
+        // $weekend = $agoDate->endOfWeek()->format('Y-m-d H:i');
+        // $sale= Sale::where('created_at', ">", DB::raw('NOW() - INTERVAL 1 WEEK'))->take(100)->get();
+        // return [$last_start_week ,$last_end_week];
         // return date('Y/m/d', strtotime($agoDate));
         // return Carbon::parse($agoDate);
         // return Sale::all();
