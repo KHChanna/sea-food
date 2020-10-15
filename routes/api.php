@@ -39,6 +39,10 @@ use Illuminate\Support\Facades\Route;
 
         // Unit
         Route::get('units', 'API\UnitController@index');
+
+        //profile
+        Route::get('/me', 'API\Auth\LoginController@profile');
+
     });
 
 // Route::get('/products/list', 'Administrator\ProductsController@findProductsCriteria');

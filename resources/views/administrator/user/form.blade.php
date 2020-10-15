@@ -7,8 +7,8 @@
   <div class="form-group col-md-6">
     <label for="inputEmail4">Gender</label>
     <select class="form-control" id="exampleFormControlSelect1" name="gender"  required>
-      <option value="0">Male</option>
-      <option value="1">Female</option>
+      <option value="1">Male</option>
+      <option value="2">Female</option>
     </select>
   </div>
 

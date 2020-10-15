@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
@@ -55,6 +56,20 @@ class LoginController extends Controller
         return response()->json([
             'status'    => 200,
             'message'   => 'Logout Successfully!',
+        ]);
+    }
+
+    public function profile()
+    {
+        return response()->json([
+            'data'  => [
+                [
+                    'name'      =>  auth()->user()->name,
+                    'gender'    =>  gender(auth()->user()->gender),
+                    'phone'     =>  auth()->user()->phone,
+                    'email'     =>  auth()->user()->email,
+                ]
+            ]
         ]);
     }
 }

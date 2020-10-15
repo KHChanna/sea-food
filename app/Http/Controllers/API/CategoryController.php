@@ -52,4 +52,9 @@ class CategoryController extends Controller
         return JsonResponse( count($categories) );
     }
 
+    public function show($id)
+    {
+        return CategoryResource::collection(Category::where('id', $id)->get());
+    }
+
 }
