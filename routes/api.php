@@ -32,6 +32,7 @@ use Illuminate\Support\Facades\Route;
         // Product
         Route::get('products/count', 'API\ProductController@getCountProduct');
         Route::apiResource('products', 'API\ProductController');
+        Route::post('products/{product}', 'API\ProductController@update');
         // Supplier
         Route::get('suppliers/count', 'API\SupplierController@count');
         Route::apiResource('suppliers', 'API\SupplierController');
