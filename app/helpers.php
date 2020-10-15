@@ -77,3 +77,18 @@
  {
    return DB::table('currencies')->latest('id')->first();
  }
+
+ function gender($id)
+ {
+   switch ($id) {
+      case 1:
+        return 'Male';
+        break;
+      case 2:
+        return 'Male';
+        break;
+     default:
+        return 'None';
+        break;
+   }
+ }
