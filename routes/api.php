@@ -42,7 +42,11 @@ use Illuminate\Support\Facades\Route;
         Route::get('units', 'API\UnitController@index');
 
         //profile
-        Route::get('/me', 'API\Auth\LoginController@profile');
+        // Route::get('/me', 'API\Auth\LoginController@profile');
+        Route::apiResource('/me', 'API\UserController');
+        // home screen
+        Route::apiResource('/home', 'API\HomeController');
+
 
     });
 
