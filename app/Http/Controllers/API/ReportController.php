@@ -4,7 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Sale;
+use App\Models\SaleDetail;
 use Carbon\Carbon;
+use Carbon\Traits\Week;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -23,7 +25,7 @@ class ReportController extends Controller
         } else if ($request->type == 'last_week') {
             $data = $this->getLastWeekRecord();
         } else if ($request->type == 'this_month') {
-            $data = ['No data'];
+            $data = $this->getThisMonth();
         } else {
             $data = [
                 'message' =>'Invalid type, please make sure you give the correct type',
@@ -43,70 +45,20 @@ class ReportController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Best selling
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function bestSelling()
     {
-        //
+        // $best_sale = SaleDetail::whereDate('created_at', Carbon::today())->select('product_id')->orderBy('product_id', 'ASC')->get();
+        // foreach ($best_sale as $key => $value) {
+            
+        // }
+
+        // return $data;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 
     public function getThisWeekRecord()
     {
@@ -200,5 +152,36 @@ class ReportController extends Controller
         }
 
         return $data;
+    }
+
+    public function getThisMonth()
+    {
+        $start = new Carbon('first day of last month');
+        $end = new Carbon('last day of last month');
+
+        $start = $start->addMonth(1)->toDateString();
+
+        $week1 = Sale::whereMonth('created_at', date('m'))
+                ->whereBetween('created_at', [$start . ' 00:00:00', date('Y/m/d', strtotime($start . ' + 6 days')).' 00:00:00'])
+                ->sum('total');
+
+        $week2 = Sale::whereMonth('created_at', date('m'))
+            ->whereBetween('created_at', [date('Y/m/d', strtotime($start . ' + 7 days')) . ' 00:00:00', date('Y/m/d', strtotime($start . ' + 13 days')).' 00:00:00'])
+            ->sum('total');
+
+        $week3 = Sale::whereMonth('created_at', date('m'))
+            ->whereBetween('created_at', [date('Y/m/d', strtotime($start . ' + 13 days')) . ' 00:00:00', date('Y/m/d', strtotime($start . ' + 20 days')).' 00:00:00'])
+            ->sum('total');
+
+        $week4 = Sale::whereMonth('created_at', date('m'))
+            ->whereBetween('created_at', [date('Y/m/d', strtotime($start . ' + 21 days')) . ' 00:00:00', date('Y/m/d', strtotime($start . ' + 27 days')).' 00:00:00'])
+            ->sum('total');
+        
+        return [ 
+           'week1'  =>  $week1,
+           'week2'  =>  $week2,
+           'week3'  =>  $week3,
+           'week4'  =>  $week4,
+        ];
     }
 }

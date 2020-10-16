@@ -48,18 +48,6 @@ use Illuminate\Support\Facades\Route;
         // home screen
         // Route::apiResource('/report', 'API\HomeController');
         Route::get('/report', 'API\ReportController@index');
-
+        Route::get('/report/best-selling', 'API\ReportController@bestSelling');
 
     });
-
-// Route::get('/products/list', 'Administrator\ProductsController@findProductsCriteria');
-// Route::get('/products/detail/{id}', 'Administrator\ProductsController@productDetail');
-// Route::get('/products/countAll', 'Administrator\ProductsController@productTotal');
-// // category route
-// Route::get('/category/list', 'Administrator\CategoryController@findCategoryCriteria');
-// Route::get('/category/detail/{id}', 'Administrator\CategoryController@categoryDetail');
-// Route::get('/category/countAll', 'Administrator\CategoryController@categoryTotal');
-// // supplier route
-// Route::get('/supplier/list', 'Administrator\SupplierController@findSupplierCriteria');
-// Route::get('/supplier/detail/{id}', 'Administrator\SupplierController@supplierDetail');
-// Route::get('/supplier/countAll', 'Administrator\SupplierController@supplierTotal');
