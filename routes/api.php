@@ -45,7 +45,8 @@ use Illuminate\Support\Facades\Route;
         // Route::get('/me', 'API\Auth\LoginController@profile');
         Route::apiResource('/me', 'API\UserController');
         // home screen
-        Route::apiResource('/home', 'API\HomeController');
+        // Route::apiResource('/report', 'API\HomeController');
+        Route::get('/report', 'API\ReportController@index');
 
 
     });
